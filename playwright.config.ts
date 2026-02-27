@@ -24,7 +24,7 @@ const bddConfig = defineBddConfig({
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: bddConfig,
+  testDir: './tests',
 
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
