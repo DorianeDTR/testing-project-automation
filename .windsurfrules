@@ -1,0 +1,33 @@
+---
+trigger: always_on
+---
+
+# Environment commands
+
+## Stack
+- **Languages**: Typescript, Node.js
+- **Frameworks**: Playwright, Playwright-bdd
+
+## Architecture & Separation of Concerns (SoC)
+- **Features**: Gherkin files only (`.features`). Must be written in English.
+- **Pages**: Pure Page Object Model (POM) classes. No test logic or step definitions here.
+- **Steps**: Step definitions only. Use Page Objects via fixtures.
+- **Fixtures**: Centralize Page Object instantiation in `support/fixtures.ts`. 
+    **Mandatory**: Every new Page Object must be added to this file.
+
+## Naming Conventions
+- All filenames must be in **kebab-case** (lowercase with hyphens).
+- Page Objects: `name-page.po.ts`
+- Features: `name.feature`
+- Step definitions: `name.steps.ts`
+
+## Automation Best Practices
+- **Locators**: Use Playwright's best practices (e.g., `getByRole`, `getByLabel`). Avoid fragile CSS/XPath selectors (no `div > div > span`).
+- **Simplicity**: Keep code DRY but prioritize readability.
+
+## Security
+- **Environment variables**: Use environment variables for sensitive data (e.g., API keys, credentials).
+- **Dotenv**: Use dotenv to load environment variables from a `.env` file.
+
+
+

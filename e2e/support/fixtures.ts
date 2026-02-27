@@ -3,10 +3,12 @@ import { test as base } from "playwright-bdd";
 
 import { LoginPagePo } from "../pages/login-page.po";
 import { HomepagePo } from "../pages/homepage.po";
+import { CartPagePo } from "../pages/CartPagePo";
 
 interface Pages {
   loginPagePo: LoginPagePo;
   homepagePo: HomepagePo;
+  cartPagePo: CartPagePo;
 };
 
 export interface AllFixtures extends Pages {
@@ -19,5 +21,8 @@ export const pageFixtures = base.extend<Pages>({
     },
     homepagePo: async ({ page }, use) => {
         await use(new HomepagePo(page));
+    },
+    cartPagePo: async ({ page }, use) => {
+        await use(new CartPagePo(page));
     },
 });
