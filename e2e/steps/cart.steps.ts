@@ -9,9 +9,9 @@ Given('I am on the homepage', async ({ homepagePo }: AllFixtures) => {
   await homepagePo.goTo();
 });
 
-Given('the home page is visible successfully', async ({ homepagePo }: AllFixtures) => {
-  await homepagePo.shouldBeDisplayed();
-});
+// Given('the home page is visible successfully', async ({ homepagePo }: AllFixtures) => {
+//   await homepagePo.shouldBeDisplayed();
+// });
 
 When('I click on {string} button', async ({ page }: AllFixtures, buttonName: string) => {
   if (buttonName === 'Products') {

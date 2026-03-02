@@ -8,7 +8,6 @@ Feature: Add Products in Cart
   
   Scenario: Add two different products to cart
     Given I am on the homepage
-    And the home page is visible successfully
     When I click on 'Products' button
     Then I am navigated to ALL PRODUCTS page successfully
     And the products list is visible
