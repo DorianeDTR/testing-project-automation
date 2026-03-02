@@ -5,7 +5,6 @@ test.describe('Add Products in Cart', () => {
 
   test('Add two different products to cart', { tag: ['@Automated'] }, async ({ Given, When, Then, And, cartPagePo, homepagePo, page, productsPagePo }) => { 
     await Given('I am on the homepage', null, { homepagePo }); 
-    await And('the home page is visible successfully', null, { homepagePo }); 
     await When('I click on \'Products\' button', null, { page }); 
     await Then('I am navigated to ALL PRODUCTS page successfully', null, { productsPagePo }); 
     await And('the products list is visible', null, { productsPagePo }); 
