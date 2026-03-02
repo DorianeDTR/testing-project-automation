@@ -16,9 +16,9 @@ export class HomepagePo extends BasePo {
   }
 
   // Navigation method
-  // async goTo(): Promise<void> {
-  //   await this.page.goto('/');
-  // }
+  async goTo(): Promise<void> {
+    await this.page.goto('https://automationexercise.com/');
+  }
   
   async shouldBeDisplayed() {
     await expect(this.homepageContainer).toBeVisible();
