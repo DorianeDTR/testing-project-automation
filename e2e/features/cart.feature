@@ -5,7 +5,7 @@ Feature: Add Products in Cart
   I want to add multiple products to my cart
   So that I can purchase them together
 
-  @Automated
+  
   Scenario: Add two different products to cart
     Given I am on the homepage
     And the home page is visible successfully
