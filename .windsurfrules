@@ -2,6 +2,9 @@
 trigger: always_on
 ---
 
+# Mandatory Standards
+All generated code MUST strictly follow the patterns defined below. If existing code does not match, refactor it immediately upon request.
+
 # Environment commands
 
 ## Stack
@@ -29,5 +32,13 @@ trigger: always_on
 - **Environment variables**: Use environment variables for sensitive data (e.g., API keys, credentials).
 - **Dotenv**: Use dotenv to load environment variables from a `.env` file.
 
-
+## POM Patterns
+- **Locators Declaration**: Use **getters** for all locators. Do not initialize them in the constructor.
+  - *Example*: `get emailInput() { return this.page.locator('input[data-qa="login-email"]'); }`
+- **Preferred Selectors**: Prioritize `data-qa` attributes or Playwright's specific locators (getByRole, getByText) within the getters.
+- **Method Structure**: 
+  - Use a `constructor(page: Page) { super(page); }` (assuming a BasePage exists).
+  - Create an `async shouldBeDisplayed()` method for every page to verify its main container visibility.
+  - Group actions into high-level methods (e.g., `logAs`, `logAsUser`) rather than simple clicks.
+- **Navigation**: Include an `async goTo()` method in each Page Object using relative paths (e.g., `await this.page.goto('/login');`).
 

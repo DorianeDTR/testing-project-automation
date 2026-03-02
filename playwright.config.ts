@@ -14,8 +14,8 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const bddConfig = defineBddConfig({
-  features: './features/**/*.feature',
-  steps: ['./steps/**/*.ts', './tests/support/fixtures.ts'],
+  features: './e2e/features/*.feature',
+  steps: ['./e2e/steps/*.ts', './e2e/support/fixtures.ts'],
   outputDir: './bdd-gen',
   tags: '@Automated',
 });
@@ -24,7 +24,7 @@ const bddConfig = defineBddConfig({
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: bddConfig,
 
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */

@@ -1,28 +1,59 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
+import { BasePo } from './base.po';
 
-export class CartPagePo {
-  private page: Page;
-  private cartLink: Locator;
-  private productRows: Locator;
-  private quantityInput: Locator;
-  private proceedToCheckoutButton: Locator;
-  private continueShoppingButton: Locator;
-  private deleteButton: Locator;
-  private emptyCartMessage: Locator;
-  private totalPrice: Locator;
-
+export class CartPagePo extends BasePo {
   constructor(page: Page) {
-    this.page = page;
-    this.cartLink = page.getByRole('link', { name: 'Cart' });
-    this.productRows = page.locator('#cart_info_table tr[id*="product-"]');
-    this.quantityInput = page.locator('input[name="quantity"]');
-    this.proceedToCheckoutButton = page.getByRole('button', { name: 'Proceed To Checkout' });
-    this.continueShoppingButton = page.getByRole('button', { name: 'Continue Shopping' });
-    this.deleteButton = page.locator('a.cart_quantity_delete');
-    this.emptyCartMessage = page.getByText('Cart is empty!');
-    this.totalPrice = page.locator('#cart_info_table .cart_total_price');
+    super(page);
   }
 
+  // Locators using getters
+  get cartLink() {
+    return this.page.getByRole('link', { name: 'Cart' });
+  }
+
+  get productRows() {
+    return this.page.locator('#cart_info_table tr[id*="product-"]');
+  }
+
+  get quantityInput() {
+    return this.page.locator('input[name="quantity"]');
+  }
+
+  get proceedToCheckoutButton() {
+    return this.page.getByRole('button', { name: 'Proceed To Checkout' });
+  }
+
+  get continueShoppingButton() {
+    return this.page.getByRole('button', { name: 'Continue Shopping' });
+  }
+
+  get deleteButton() {
+    return this.page.locator('a.cart_quantity_delete');
+  }
+
+  get emptyCartMessage() {
+    return this.page.getByText('Cart is empty!');
+  }
+
+  get totalPrice() {
+    return this.page.locator('#cart_info_table .cart_total_price');
+  }
+
+  get cartContainer() {
+    return this.page.locator('#cart_items');
+  }
+
+  // Navigation method
+  async goTo(): Promise<void> {
+    await this.page.goto('/view_cart');
+  }
+
+  // Page verification method
+  async shouldBeDisplayed(): Promise<void> {
+    await expect(this.cartContainer).toBeVisible();
+  }
+
+  // High-level action methods
   async navigateToCart(): Promise<void> {
     await this.cartLink.click();
   }
@@ -41,7 +72,7 @@ export class CartPagePo {
     return await productRow.locator('input[name="quantity"]').inputValue() || '';
   }
 
-  async updateQuantity(productName: string, quantity: string): Promise<void> {
+  async updateProductQuantity(productName: string, quantity: string): Promise<void> {
     const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
     await productRow.locator('input[name="quantity"]').fill(quantity);
   }
@@ -70,5 +101,12 @@ export class CartPagePo {
   async isProductInCart(productName: string): Promise<boolean> {
     const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
     return await productRow.isVisible();
+  }
+
+  async clearCart(): Promise<void> {
+    const productCount = await this.getProductCount();
+    for (let i = 0; i < productCount; i++) {
+      await this.deleteButton.first().click();
+    }
   }
 }
