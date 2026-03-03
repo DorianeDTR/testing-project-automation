@@ -21,6 +21,9 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Create users.json from secret
+      run: echo '${{ secrets.E2E_USERS_JSON }}' > e2e/users.json
+
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
