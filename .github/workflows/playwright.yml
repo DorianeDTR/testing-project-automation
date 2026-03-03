@@ -30,7 +30,7 @@ jobs:
     - name: Run API Tests
       run: |
         npm install -g newman
-        newman run postman/collection_auto_exo.json -e postman/env_auto_exo.json
+        newman run postman/Collection_auto_exo.json -e postman/Env_Auto_exo.json
         
     - name: Run Playwright tests
       run: npx playwright test
