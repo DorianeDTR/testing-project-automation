@@ -62,9 +62,17 @@ export class CartPagePo extends BasePo {
     return await this.productRows.count();
   }
 
-  async getProductPrice(productName: string): Promise<string> {
-    const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
-    return await productRow.locator('.cart_price').textContent() || '';
+  // async getProductPrice(productName: string): Promise<string> {
+  //   const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
+  //   return await productRow.locator('.cart_price').textContent() || '';
+  // }
+
+  // Dans CartPo
+  async getProductPriceById(productId: string): Promise<string> {
+    // On cible directement la ligne par son ID unique (ex: #product-1)
+    const productRow = this.page.locator(`tr#product-${productId}`);
+    const price = await productRow.locator('.cart_price').textContent();
+    return price?.trim() || '';
   }
 
   async getProductQuantity(productName: string): Promise<string> {

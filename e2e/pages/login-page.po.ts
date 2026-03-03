@@ -21,15 +21,18 @@ export class LoginPagePo extends BasePo {
   constructor(page: Page) {
     super(page);
   }
+
   async goTo() {
-    await this.page.goto('/login');
+    await this.navigateWithConsent('https://automationexercise.com/login');
   }
 
   async shouldBeDisplayed() {
+    await this.ensurePageReady();
     await expect(this.pageLocator).toBeVisible();
   }
 
   async logAs(email: string, password: string) {
+    await this.ensurePageReady();
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
     await this.loginButton.click();
@@ -41,9 +44,9 @@ export class LoginPagePo extends BasePo {
   }
 
   async wronglyLogAs(email: string, password: string) {
+    await this.ensurePageReady();
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
     await this.loginButton.click();
   }
-
 }

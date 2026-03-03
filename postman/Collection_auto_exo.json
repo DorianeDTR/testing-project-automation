@@ -1,0 +1,561 @@
+{
+  "info": {
+    "_postman_id": "8118a4f8-c592-4188-9fc2-b60318b21690",
+    "name": "Auto Exercise Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "40869458"
+  },
+  "item": [
+    {
+      "name": "Get All products list",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/productsList",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "productsList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Post All products list",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/productsList",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "productsList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All brands list",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/brandsList",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "brandsList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Put All brands list",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/brandsList",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "brandsList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Post search product",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "search_product",
+              "value": "top",
+              "type": "text",
+              "uuid": "c94530e0-ce6d-456b-86c3-ff7c78f6faec"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/searchProduct",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "searchProduct"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Post search product no parameter",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/searchProduct",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "searchProduct"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create user account",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "JohnDoe",
+              "type": "text",
+              "uuid": "107068a1-a0ec-4833-a733-fe1d0b5b8038"
+            },
+            {
+              "key": "email",
+              "value": "miniga3780@ostahie.com",
+              "type": "text",
+              "uuid": "e86343a3-59ee-4a98-9ab0-2cdf056a9f48"
+            },
+            {
+              "key": "password",
+              "value": "pa$$word",
+              "type": "text",
+              "uuid": "d8c06fc5-b622-4a45-baf3-731d24018110"
+            },
+            {
+              "key": "title",
+              "value": "Mr",
+              "type": "text",
+              "uuid": "c6d33e82-4727-47ee-8fab-9265fea004cd"
+            },
+            {
+              "key": "firstname",
+              "value": "John",
+              "type": "text",
+              "uuid": "8b6ce838-e568-4498-951b-5dc2645f50b3"
+            },
+            {
+              "key": "lastname",
+              "value": "Doe",
+              "type": "text",
+              "uuid": "fe17f282-cc5f-4703-b857-ce99239ce562"
+            },
+            {
+              "key": "address1",
+              "value": "Here and there",
+              "type": "text",
+              "uuid": "24c7e077-2387-4099-a5b7-08cc78a5fcb4"
+            },
+            {
+              "key": "country",
+              "value": "France",
+              "type": "text",
+              "uuid": "9cbd0c2c-b395-41fd-9b3c-6e337c220394"
+            },
+            {
+              "key": "state",
+              "value": "Gironde",
+              "type": "text",
+              "uuid": "97cd23b4-3c3b-43a6-bb01-daabc42ef95b"
+            },
+            {
+              "key": "city",
+              "value": "Bordeaux",
+              "type": "text",
+              "uuid": "bf1f1e56-bd65-4e81-9398-cf4bc6e4a176"
+            },
+            {
+              "key": "zipcode",
+              "value": "33000",
+              "type": "text",
+              "uuid": "373983de-adc1-4c7b-9f7c-547417772b90"
+            },
+            {
+              "key": "mobile_number",
+              "value": "0123456789",
+              "type": "text",
+              "uuid": "93999187-f9a6-4e20-aabf-ad0bed2c99dc"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/createAccount",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "createAccount"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Post verify login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "miniga3780@ostahie.com",
+              "type": "text",
+              "uuid": "bc9219ec-bdd5-4aaa-9a39-043e03476c4c"
+            },
+            {
+              "key": "password",
+              "value": "pa$$word",
+              "type": "text",
+              "uuid": "33b63a10-651d-417b-991c-537fc81a552a"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/verifyLogin",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "verifyLogin"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Post verify login no email parameter",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "test@example.com",
+              "type": "text",
+              "uuid": "bc9219ec-bdd5-4aaa-9a39-043e03476c4c",
+              "disabled": true
+            },
+            {
+              "key": "password",
+              "value": "pa$$word",
+              "type": "text",
+              "uuid": "33b63a10-651d-417b-991c-537fc81a552a"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/verifyLogin",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "verifyLogin"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete verify login",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/verifyLogin",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "verifyLogin"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Post verify login invalid parameters",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/verifyLogin",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "verifyLogin"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete user account",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "miniga3780@ostahie.com",
+              "type": "text",
+              "uuid": "e86343a3-59ee-4a98-9ab0-2cdf056a9f48"
+            },
+            {
+              "key": "password",
+              "value": "pa$$word",
+              "type": "text",
+              "uuid": "d8c06fc5-b622-4a45-baf3-731d24018110"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/deleteAccount",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "deleteAccount"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update user account",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "JohnDoe",
+              "type": "text",
+              "uuid": "107068a1-a0ec-4833-a733-fe1d0b5b8038"
+            },
+            {
+              "key": "email",
+              "value": "miniga3780@ostahie.com",
+              "type": "text",
+              "uuid": "e86343a3-59ee-4a98-9ab0-2cdf056a9f48"
+            },
+            {
+              "key": "password",
+              "value": "pa$$word",
+              "type": "text",
+              "uuid": "d8c06fc5-b622-4a45-baf3-731d24018110"
+            },
+            {
+              "key": "title",
+              "value": "Mrs",
+              "type": "text",
+              "uuid": "c6d33e82-4727-47ee-8fab-9265fea004cd"
+            },
+            {
+              "key": "firstname",
+              "value": "Jane",
+              "type": "text",
+              "uuid": "8b6ce838-e568-4498-951b-5dc2645f50b3"
+            },
+            {
+              "key": "lastname",
+              "value": "Doe",
+              "type": "text",
+              "uuid": "fe17f282-cc5f-4703-b857-ce99239ce562"
+            },
+            {
+              "key": "address1",
+              "value": "Here and there",
+              "type": "text",
+              "uuid": "24c7e077-2387-4099-a5b7-08cc78a5fcb4"
+            },
+            {
+              "key": "country",
+              "value": "France",
+              "type": "text",
+              "uuid": "9cbd0c2c-b395-41fd-9b3c-6e337c220394"
+            },
+            {
+              "key": "state",
+              "value": "Gironde",
+              "type": "text",
+              "uuid": "97cd23b4-3c3b-43a6-bb01-daabc42ef95b"
+            },
+            {
+              "key": "city",
+              "value": "Bordeaux",
+              "type": "text",
+              "uuid": "bf1f1e56-bd65-4e81-9398-cf4bc6e4a176"
+            },
+            {
+              "key": "zipcode",
+              "value": "33000",
+              "type": "text",
+              "uuid": "373983de-adc1-4c7b-9f7c-547417772b90"
+            },
+            {
+              "key": "mobile_number",
+              "value": "0123456789",
+              "type": "text",
+              "uuid": "93999187-f9a6-4e20-aabf-ad0bed2c99dc"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/updateAccount",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "updateAccount"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get user account detail",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "miniga3780@ostahie.com",
+              "type": "text",
+              "uuid": "e86343a3-59ee-4a98-9ab0-2cdf056a9f48"
+            },
+            {
+              "key": "password",
+              "value": "pa$$word",
+              "type": "text",
+              "uuid": "d8c06fc5-b622-4a45-baf3-731d24018110",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/getUserDetailByEmail?email=miniga3780@ostahie.com",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "getUserDetailByEmail"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "miniga3780@ostahie.com"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

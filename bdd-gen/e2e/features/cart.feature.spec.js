@@ -1,24 +1,25 @@
 // Generated from: e2e/features/cart.feature
 import { pageFixtures as test } from "../../../e2e/support/fixtures.ts";
 
-// test.describe('Add Products in Cart', () => {
+test.describe('Add Products in Cart', () => {
 
-//   test('Add two different products to cart', { tag: ['@Automated'] }, async ({ Given, When, Then, And, cartPagePo, homepagePo, page, productsPagePo }) => { 
-//     await Given('I am on the homepage', null, { homepagePo }); 
-//     await When('I click on \'Products\' button', null, { page }); 
-//     await Then('I am navigated to ALL PRODUCTS page successfully', null, { productsPagePo }); 
-//     await And('the products list is visible', null, { productsPagePo }); 
-//     await When('I hover over the first product and click \'Add to cart\'', null, { productsPagePo }); 
-//     await And('I click Continue Shopping button', null, { productsPagePo }); 
-//     await And('I hover over the second product and click \'Add to cart\'', null, { productsPagePo }); 
-//     await And('I click View Cart button', null, { productsPagePo }); 
-//     await Then('both products are added to Cart', null, { cartPagePo }); 
-//     await And('their prices are displayed correctly', null, { cartPagePo }); 
-//     await And('their quantities are displayed correctly', null, { cartPagePo }); 
-//     await And('their total price is calculated correctly', null, { cartPagePo }); 
-//   });
+  test('Add two different products to cart', { tag: ['@Automated'] }, async ({ Given, When, Then, And, cartPagePo, homepagePo, page, productsPagePo }) => { 
+    await Given('I am on the homepage', null, { homepagePo }); 
+    await And('the home page is visible successfully', null, { homepagePo }); 
+    await When('I click on \'Products\' button', null, { page }); 
+    await Then('I am navigated to ALL PRODUCTS page successfully', null, { productsPagePo }); 
+    await And('the products list is visible', null, { productsPagePo }); 
+    await When('I hover over the first product and click \'Add to cart\'', null, { productsPagePo }); 
+    await And('I click Continue Shopping button', null, { productsPagePo }); 
+    await And('I hover over the second product and click \'Add to cart\'', null, { productsPagePo }); 
+    await And('I click View Cart button', null, { productsPagePo }); 
+    await Then('both products are added to Cart', null, { cartPagePo }); 
+    await And('their prices are displayed correctly', null, { cartPagePo }); 
+    await And('their quantities are displayed correctly', null, { cartPagePo }); 
+    await And('their total price is calculated correctly', null, { cartPagePo }); 
+  });
 
-// });
+});
 
 // == technical section ==
 

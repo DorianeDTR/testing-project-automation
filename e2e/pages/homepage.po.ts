@@ -8,7 +8,15 @@ export class HomepagePo extends BasePo {
   }
 
   get homepageContainer() {
-    return this.page.locator('.slider');
+    return this.page.locator('#slider-carousel[data-ride="carousel"]');
+  }
+
+  get featuresItems() {
+    return this.page.locator('.features_items');
+  }
+
+  get header() {
+    return this.page.locator('header');
   }
   
   constructor(page: Page) {
@@ -17,10 +25,25 @@ export class HomepagePo extends BasePo {
 
   // Navigation method
   async goTo(): Promise<void> {
-    await this.page.goto('https://automationexercise.com/');
+    await this.navigateWithConsent('https://automationexercise.com/');
   }
   
   async shouldBeDisplayed() {
+    await this.ensurePageReady();
     await expect(this.homepageContainer).toBeVisible();
+    await expect(this.featuresItems).toBeVisible();
+    await expect(this.header).toBeVisible();
+  }
+
+  async isHomepageFullyLoaded(): Promise<boolean> {
+    try {
+      const isSliderVisible = await this.homepageContainer.isVisible();
+      const isFeaturesVisible = await this.featuresItems.isVisible();
+      const isHeaderVisible = await this.header.isVisible();
+      
+      return isSliderVisible && isFeaturesVisible && isHeaderVisible;
+    } catch {
+      return false;
+    }
   }
 }

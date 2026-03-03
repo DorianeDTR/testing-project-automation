@@ -5,14 +5,20 @@ import { AllFixtures, pageFixtures } from "../support/fixtures";
 export const fixtures = pageFixtures;
 const {Given, When, Then} = createBdd(fixtures);
 
-Given('I go to the login page', async ({ loginPagePo }: AllFixtures) => {
+Given('I begin my journey on the homepage', async ({ homepagePo }: AllFixtures) => {
+  await homepagePo.goTo();
+  await homepagePo.shouldBeDisplayed();
+});
+
+When('I go to the login page', async ({ loginPagePo }: AllFixtures) => {
   await loginPagePo.goTo();
   await loginPagePo.shouldBeDisplayed();
 });
 
-When('I fill the login form with valid data', async ({ loginPagePo }: AllFixtures) => {
-  await loginPagePo.logAsUser('john');
+Then('I fill the login form with valid data', async ({ loginPagePo }: AllFixtures) => {
+  await loginPagePo.logAs('miniga3780@ostahie.com', 'pa$$word');
 });
+
 Then('I am redirected to the homepage', async ({ homepagePo }: AllFixtures) => {
   await homepagePo.shouldBeDisplayed();
 });

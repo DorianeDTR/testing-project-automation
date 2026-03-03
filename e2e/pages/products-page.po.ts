@@ -41,11 +41,12 @@ export class ProductsPagePo extends BasePo {
 
   // Navigation method
   async goTo(): Promise<void> {
-    await this.page.goto('/products');
+    await this.navigateWithConsent('https://automationexercise.com/products');
   }
 
   // Page verification method
   async shouldBeDisplayed(): Promise<void> {
+    await this.ensurePageReady();
     await expect(this.allProductsHeader).toBeVisible();
     await expect(this.productsList).toBeVisible();
   }
@@ -56,21 +57,27 @@ export class ProductsPagePo extends BasePo {
   }
 
   async addFirstProductToCart(): Promise<void> {
-    await this.productItems.first().hover();
-    await this.addToCartButton.first().click();
+    await this.ensurePageReady();
+    // Target specific product by data-product-id and use force click
+    const firstProductAddToCart = this.page.locator('.productinfo >> a[data-product-id="3"]');
+    await firstProductAddToCart.click({ force: true });
   }
 
   async addSecondProductToCart(): Promise<void> {
-    await this.productItems.nth(1).hover();
-    await this.addToCartButton.nth(1).click();
+    await this.ensurePageReady();
+    // Target specific product by data-product-id and use force click
+    const secondProductAddToCart = this.page.locator('.productinfo >> a[data-product-id="4"]');
+    await secondProductAddToCart.click({ force: true });
   }
 
   async continueShopping(): Promise<void> {
-    await this.continueShoppingButton.click();
+    await this.ensurePageReady();
+    await this.continueShoppingButton.click({ force: true });
   }
 
   async viewCart(): Promise<void> {
-    await this.viewCartButton.click();
+    await this.ensurePageReady();
+    await this.viewCartButton.click({ force: true });
   }
 
   async isProductsListVisible(): Promise<boolean> {
@@ -82,8 +89,8 @@ export class ProductsPagePo extends BasePo {
   }
 
   async addProductToCart(productIndex: number): Promise<void> {
+    await this.ensurePageReady();
     const product = this.productItems.nth(productIndex);
-    await product.hover();
-    await product.locator('.add-to-cart').click();
+    await product.locator('a[data-product-id]').click({ force: true });
   }
 }
