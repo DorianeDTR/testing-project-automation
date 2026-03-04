@@ -27,15 +27,10 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    - name: Debug Path
-      run: ls -R postman/
-
     - name: Run API Tests
       run: |
-        npx newman run "postman/collection_automation_exo.json" \
-          --environment "postman/environment_automation_exo.json" \
-          --env-var "base_url=https://automationexercise.com/api" \
-          --reporters cli
+        npm install newman
+        ./node_modules/.bin/newman run postman/collection.json -e postman/env.json --env-var "base_url=https://automationexercise.com/api" --reporters cli
         
     - name: Run Playwright tests
       run: npx playwright test
