@@ -32,8 +32,8 @@ jobs:
 
     - name: Run API Tests
       run: |
-        npx newman run "postman/Collection_auto_exo.json" \
-          --environment "postman/Env_Auto_exo.json" \
+        npx newman run "postman/collection_automation_exo.json" \
+          --environment "postman/environment_automation_exo.json" \
           --env-var "base_url=https://automationexercise.com/api" \
           --reporters cli
         
