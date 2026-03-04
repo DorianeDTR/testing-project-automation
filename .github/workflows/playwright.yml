@@ -29,13 +29,9 @@ jobs:
 
     - name: Debug Path
       run: ls -R postman/
-      
+
     - name: Run API Tests
-      run: 
-        npx newman run "postman/Collection_auto_exo.json" \
-        -e "postman/Env_Auto_exo.json" \
-        --env-var "base_url=https://automationexercise.com/api" \
-        --reporters cli
+      run: npx newman run "postman/Collection_auto_exo.json" -e "postman/Env_Auto_exo.json" --env-var "base_url=https://automationexercise.com/api" --reporters cli
         
     - name: Run Playwright tests
       run: npx playwright test
