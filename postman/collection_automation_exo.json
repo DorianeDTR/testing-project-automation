@@ -133,9 +133,9 @@
           ]
         },
         "url": {
-          "raw": "{{base_url}}/searchProduct",
+          "raw": "{{api_url}}/searchProduct",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "searchProduct"

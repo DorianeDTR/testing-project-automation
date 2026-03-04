@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test:api": "newman run postman/collection_automation_exo.json -e postman/environment_automation_exo.json --reporters cli",
+    "test:api": "newman -c postman/collection_automation_exo.json -e postman/environment_automation_exo.json",
     "bdd:run": "npx bddgen --tags \"@Automated\" && npx playwright test --ui"
   },
   "keywords": [],

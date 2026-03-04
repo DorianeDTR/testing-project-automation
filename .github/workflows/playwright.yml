@@ -28,9 +28,14 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run API Tests
-      run: |
-        npm install newman
-        npm run test:api
+      run: npm run test:api
+      
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: newman-report
+        path: newman/
+        retention-days: 30
         
     - name: Run Playwright tests
       run: npx playwright test
