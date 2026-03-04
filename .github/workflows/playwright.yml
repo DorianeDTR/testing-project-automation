@@ -27,6 +27,9 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
+    - name: Debug Path
+      run: ls -R postman/
+      
     - name: Run API Tests
       run: 
         npx newman run "postman/Collection_auto_exo.json" \
