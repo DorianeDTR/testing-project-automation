@@ -28,7 +28,9 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run API Tests
-      run: npx newman run "postman/collection_automation_exo.json" -e "postman/environment_automation_exo.json" --env-var "api_url=https://automationexercise.com/api" --reporters cli
+      run: |
+        npm install newman
+        npm run test:api
         
     - name: Run Playwright tests
       run: npx playwright test
