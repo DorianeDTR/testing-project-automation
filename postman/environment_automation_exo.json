@@ -3,14 +3,14 @@
 	"name": "Auto Exercise",
 	"values": [
 		{
-			"key": "base_url",
-			"value": "",
+			"key": "api_url",
+			"value": "https://automationexercise.com/api",
 			"type": "default",
 			"enabled": true
 		}
 	],
 	"color": null,
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2026-03-04T09:00:13.779Z",
+	"_postman_exported_at": "2026-03-04T09:25:02.092Z",
 	"_postman_exported_using": "Postman/12.0.3"
 }

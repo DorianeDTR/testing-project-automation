@@ -30,7 +30,10 @@ jobs:
     - name: Run API Tests
       run: |
         npm install newman
-        ./node_modules/.bin/newman run postman/collection.json -e postman/env.json --env-var "base_url=https://automationexercise.com/api" --reporters cli
+        npx newman run ./postman/collection.json \
+          --environment ./postman/env.json \
+          --env-var "api_url=https://automationexercise.com/api" \
+          --reporters cli
         
     - name: Run Playwright tests
       run: npx playwright test
