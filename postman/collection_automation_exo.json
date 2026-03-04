@@ -24,9 +24,9 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/productsList",
+          "raw": "{{api_url}}/productsList",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "productsList"
@@ -50,9 +50,9 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/productsList",
+          "raw": "{{api_url}}/productsList",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "productsList"
@@ -79,9 +79,9 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/brandsList",
+          "raw": "{{api_url}}/brandsList",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "brandsList"
@@ -105,9 +105,9 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/brandsList",
+          "raw": "{{api_url}}/brandsList",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "brandsList"
@@ -159,9 +159,9 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/searchProduct",
+          "raw": "{{api_url}}/searchProduct",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "searchProduct"
@@ -253,9 +253,9 @@
           ]
         },
         "url": {
-          "raw": "{{base_url}}/createAccount",
+          "raw": "{{api_url}}/createAccount",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "createAccount"
@@ -287,9 +287,9 @@
           ]
         },
         "url": {
-          "raw": "{{base_url}}/verifyLogin",
+          "raw": "{{api_url}}/verifyLogin",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "verifyLogin"
@@ -322,9 +322,9 @@
           ]
         },
         "url": {
-          "raw": "{{base_url}}/verifyLogin",
+          "raw": "{{api_url}}/verifyLogin",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "verifyLogin"
@@ -348,9 +348,9 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/verifyLogin",
+          "raw": "{{api_url}}/verifyLogin",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "verifyLogin"
@@ -374,9 +374,9 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/verifyLogin",
+          "raw": "{{api_url}}/verifyLogin",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "verifyLogin"
@@ -408,9 +408,9 @@
           ]
         },
         "url": {
-          "raw": "{{base_url}}/deleteAccount",
+          "raw": "{{api_url}}/deleteAccount",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "deleteAccount"
@@ -502,9 +502,9 @@
           ]
         },
         "url": {
-          "raw": "{{base_url}}/updateAccount",
+          "raw": "{{api_url}}/updateAccount",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "updateAccount"
@@ -540,9 +540,9 @@
           ]
         },
         "url": {
-          "raw": "{{base_url}}/getUserDetailByEmail?email=miniga3780@ostahie.com",
+          "raw": "{{api_url}}/getUserDetailByEmail?email=miniga3780@ostahie.com",
           "host": [
-            "{{base_url}}"
+            "{{api_url}}"
           ],
           "path": [
             "getUserDetailByEmail"
