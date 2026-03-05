@@ -27,9 +27,9 @@ export class ProductsPagePo extends BasePo {
     return this.page.getByRole('button', { name: 'Continue Shopping' });
   }
 
-  get viewCartButton() {
-    return this.page.getByRole('link', { name: 'View Cart' });
-  }
+  // get viewCartButton() {
+  //   return this.page.getByRole('link', { name: 'View Cart' });
+  // }
 
   get allProductsHeader() {
     return this.page.getByText('All Products');
@@ -70,15 +70,10 @@ export class ProductsPagePo extends BasePo {
     await secondProductAddToCart.click({ force: true });
   }
 
-  async continueShopping(): Promise<void> {
-    await this.ensurePageReady();
-    await this.continueShoppingButton.click({ force: true });
-  }
-
-  async viewCart(): Promise<void> {
-    await this.ensurePageReady();
-    await this.viewCartButton.click({ force: true });
-  }
+  // async viewCart(): Promise<void> {
+  //   await this.ensurePageReady();
+  //   await this.viewCartButton.click({ force: true });
+  // }
 
   async isProductsListVisible(): Promise<boolean> {
     return await this.productsList.isVisible();

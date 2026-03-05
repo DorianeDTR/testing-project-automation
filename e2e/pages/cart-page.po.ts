@@ -1,120 +1,166 @@
-import { Page, Locator, expect } from '@playwright/test';
-import { BasePo } from './base.po';
+// import { Page, Locator, expect } from '@playwright/test';
+// import { BasePo } from './base.po';
 
-export class CartPagePo extends BasePo {
-  constructor(page: Page) {
-    super(page);
-  }
+// export class CartPagePo extends BasePo {
+//   constructor(page: Page) {
+//     super(page);
+//   }
 
-  // Locators using getters
-  get cartLink() {
-    return this.page.getByRole('link', { name: 'Cart' });
-  }
+//   // Locators using getters
+//   get cartLink() {
+//     return this.page.getByRole('link', { name: 'Cart' });
+//   }
 
-  get productRows() {
-    return this.page.locator('#cart_info_table tr[id*="product-"]');
-  }
+//   get productRows() {
+//     return this.page.locator('#cart_info_table tr[id*="product-"]');
+//   }
 
-  get quantityInput() {
-    return this.page.locator('input[name="quantity"]');
-  }
+//   get quantityInput() {
+//     return this.page.locator('input[name="quantity"]');
+//   }
 
-  get proceedToCheckoutButton() {
-    return this.page.getByRole('button', { name: 'Proceed To Checkout' });
-  }
+//   get proceedToCheckoutButton() {
+//     return this.page.getByRole('button', { name: 'Proceed To Checkout' });
+//   }
 
-  get continueShoppingButton() {
-    return this.page.getByRole('button', { name: 'Continue Shopping' });
-  }
+//   get continueShoppingButton() {
+//     return this.page.getByRole('button', { name: 'Continue Shopping' });
+//   }
 
-  get deleteButton() {
-    return this.page.locator('a.cart_quantity_delete');
-  }
+//   get viewCartButton() {
+//     return this.page.getByRole('link', { name: 'View Cart' });
+//   }
 
-  get emptyCartMessage() {
-    return this.page.getByText('Cart is empty!');
-  }
+//   get deleteButton() {
+//     return this.page.locator('a.cart_quantity_delete');
+//   }
 
-  get totalPrice() {
-    return this.page.locator('#cart_info_table .cart_total_price');
-  }
+//   get emptyCartMessage() {
+//     return this.page.getByText('Cart is empty!');
+//   }
 
-  get cartContainer() {
-    return this.page.locator('#cart_items');
-  }
+//   get totalPrice() {
+//     return this.page.locator('#cart_info_table .cart_total_price');
+//   }
 
-  // Navigation method
-  async goTo(): Promise<void> {
-    await this.page.goto('/view_cart');
-  }
+//   get cartContainer() {
+//     return this.page.locator('#cart_items');
+//   }
 
-  // Page verification method
-  async shouldBeDisplayed(): Promise<void> {
-    await expect(this.cartContainer).toBeVisible();
-  }
+//   // Modal/Pop-up locators for better UX
+//   get addedToCartModal() {
+//     return this.page.locator('.modal-content');
+//   }
 
-  // High-level action methods
-  async navigateToCart(): Promise<void> {
-    await this.cartLink.click();
-  }
+//   get modalContinueShoppingButton() {
+//     return this.page.getByRole('button', { name: 'Continue Shopping' });
+//   }
 
-  async getProductCount(): Promise<number> {
-    return await this.productRows.count();
-  }
+//   get modalViewCartButton() {
+//     return this.page.getByRole('link', { name: 'View Cart' });
+//   }
 
-  // async getProductPrice(productName: string): Promise<string> {
-  //   const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
-  //   return await productRow.locator('.cart_price').textContent() || '';
-  // }
+//   get modalCloseButton() {
+//     return this.page.locator('.modal-header .close-modal');
+//   }
 
-  // Dans CartPo
-  async getProductPriceById(productId: string): Promise<string> {
-    // On cible directement la ligne par son ID unique (ex: #product-1)
-    const productRow = this.page.locator(`tr#product-${productId}`);
-    const price = await productRow.locator('.cart_price').textContent();
-    return price?.trim() || '';
-  }
+//   // Navigation method
+//   async goTo(): Promise<void> {
+//     await this.page.goto('/view_cart');
+//   }
 
-  async getProductQuantity(productName: string): Promise<string> {
-    const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
-    return await productRow.locator('input[name="quantity"]').inputValue() || '';
-  }
+//   // Page verification method
+//   async shouldBeDisplayed(): Promise<void> {
+//     await expect(this.cartContainer).toBeVisible();
+//   }
 
-  async updateProductQuantity(productName: string, quantity: string): Promise<void> {
-    const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
-    await productRow.locator('input[name="quantity"]').fill(quantity);
-  }
+//   // High-level action methods
+//   async navigateToCart(): Promise<void> {
+//     await this.cartLink.click();
+//   }
 
-  async removeProduct(productName: string): Promise<void> {
-    const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
-    await productRow.locator('a.cart_quantity_delete').click();
-  }
+//   async handleAddedToCartModal(): Promise<void> {
+//     await this.ensurePageReady();
+//     // Wait for modal to appear
+//     await this.addedToCartModal.waitFor({ state: 'visible', timeout: 5000 });
+//   }
 
-  async proceedToCheckout(): Promise<void> {
-    await this.proceedToCheckoutButton.click();
-  }
+//   async clickContinueShoppingInModal(): Promise<void> {
+//     await this.ensurePageReady();
+//     await this.modalContinueShoppingButton.click({ force: true });
+//   }
 
-  async continueShopping(): Promise<void> {
-    await this.continueShoppingButton.click();
-  }
+//   async clickViewCartInModal(): Promise<void> {
+//     await this.ensurePageReady();
+//     await this.modalViewCartButton.click({ force: true });
+//   }
 
-  async isCartEmpty(): Promise<boolean> {
-    return await this.emptyCartMessage.isVisible();
-  }
+//   async closeAddedToCartModal(): Promise<void> {
+//     await this.ensurePageReady();
+//     await this.modalCloseButton.click();
+//   }
 
-  async getTotalPrice(): Promise<string> {
-    return await this.totalPrice.textContent() || '';
-  }
+//   async isAddedToCartModalVisible(): Promise<boolean> {
+//     return await this.addedToCartModal.isVisible();
+//   }
 
-  async isProductInCart(productName: string): Promise<boolean> {
-    const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
-    return await productRow.isVisible();
-  }
+//   async getProductCount(): Promise<number> {
+//     return await this.productRows.count();
+//   }
 
-  async clearCart(): Promise<void> {
-    const productCount = await this.getProductCount();
-    for (let i = 0; i < productCount; i++) {
-      await this.deleteButton.first().click();
-    }
-  }
-}
+//   // async getProductPrice(productName: string): Promise<string> {
+//   //   const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
+//   //   return await productRow.locator('.cart_price').textContent() || '';
+//   // }
+
+//   // Dans CartPo
+//   async getProductPriceById(productId: string): Promise<string> {
+//     // On cible directement la ligne par son ID unique (ex: #product-1)
+//     const productRow = this.page.locator(`tr#product-${productId}`);
+//     const price = await productRow.locator('.cart_price').textContent();
+//     return price?.trim() || '';
+//   }
+
+//   async getProductQuantity(productName: string): Promise<string> {
+//     const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
+//     return await productRow.locator('input[name="quantity"]').inputValue() || '';
+//   }
+
+//   async updateProductQuantity(productName: string, quantity: string): Promise<void> {
+//     const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
+//     await productRow.locator('input[name="quantity"]').fill(quantity);
+//   }
+
+//   async removeProduct(productName: string): Promise<void> {
+//     const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
+//     await productRow.locator('a.cart_quantity_delete').click();
+//   }
+
+//   async proceedToCheckout(): Promise<void> {
+//     await this.proceedToCheckoutButton.click();
+//   }
+
+//   async continueShopping(): Promise<void> {
+//     await this.continueShoppingButton.click();
+//   }
+
+//   async isCartEmpty(): Promise<boolean> {
+//     return await this.emptyCartMessage.isVisible();
+//   }
+
+//   async getTotalPrice(): Promise<string> {
+//     return await this.totalPrice.textContent() || '';
+//   }
+
+//   async isProductInCart(productName: string): Promise<boolean> {
+//     const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
+//     return await productRow.isVisible();
+//   }
+
+//   async clearCart(): Promise<void> {
+//     const productCount = await this.getProductCount();
+//     for (let i = 0; i < productCount; i++) {
+//       await this.deleteButton.first().click();
+//     }
+//   }
+// }

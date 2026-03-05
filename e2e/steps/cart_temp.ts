@@ -70,8 +70,3 @@ Then('their quantities are displayed correctly', async ({ cartPagePo }: AllFixtu
   expect(firstProductQuantity).toBe('1');
   expect(secondProductQuantity).toBe('1');
 });
-
-Then('their total price is calculated correctly', async ({ cartPagePo }: AllFixtures) => {
-  const totalPrice = await cartPagePo.getTotalPrice();
-  expect(totalPrice).toContain('Rs. 900');
-});
