@@ -5,12 +5,14 @@ import { LoginPagePo } from "../pages/login-page.po";
 import { HomepagePo } from "../pages/homepage.po";
 import { CartPagePo } from "../pages/cart-page.po";
 import { ProductsPagePo } from "../pages/products-page.po";
+import { CheckoutPagePo } from "../pages/checkout-page.po";
 
 interface Pages {
   loginPagePo: LoginPagePo;
   homepagePo: HomepagePo;
   cartPagePo: CartPagePo;
   productsPagePo: ProductsPagePo;
+  checkoutPagePo: CheckoutPagePo;
 };
 
 export interface AllFixtures extends Pages {
@@ -29,5 +31,8 @@ export const pageFixtures = base.extend<Pages>({
     },
     productsPagePo: async ({ page }, use) => {
         await use(new ProductsPagePo(page));
+    },
+    checkoutPagePo: async ({ page }, use) => {
+        await use(new CheckoutPagePo(page));
     },
 });

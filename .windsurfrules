@@ -43,7 +43,7 @@ All generated code MUST strictly follow the patterns defined below. If existing 
 - **Navigation**: Include an `async goTo()` method in each Page Object using relative paths (e.g., `await this.page.goto('/login');`).
 
 ## Step Definitions Standards (BDD)
-- **Chronological Alignment**: The order of step definitions in `.steps.ts` MUST strictly match the chronological execution flow of the `.feature` file it serves. 
+- **Chronological Alignment**: The order of step definitions in `.steps.ts` MUST strictly match the chronological execution flow of the `.feature` file it serves and be displayed in the exact SAME order. 
 - **Parametrization**: Avoid creating duplicate steps for similar actions. Use Gherkin parameters (e.g., `{string}`, `{int}`) to handle variations (e.g., `When I click the "first" product` and `When I click the "second" product` should share the same step definition with a parameter).
 - **Clean Transitions**: Every step that interacts with a modal or an overlay MUST ensure the UI is in a stable state before finishing (e.g., waiting for a spinner to disappear or a modal to be hidden).
 
