@@ -1,75 +1,95 @@
-// import { Page, expect } from "@playwright/test";
-// import { createBdd } from "playwright-bdd";
-// import { AllFixtures, pageFixtures } from "../support/fixtures";
+import { Page, expect } from "@playwright/test";
+import { createBdd } from "playwright-bdd";
+import { AllFixtures, pageFixtures } from "../support/fixtures";
 
-// export const fixtures = pageFixtures;
-// const {Given, When, Then} = createBdd(fixtures);
+export const fixtures = pageFixtures;
+const {Given, When, Then} = createBdd(fixtures);
 
-// Given('I am on the homepage', async ({ homepagePo }: AllFixtures) => {
-//   await homepagePo.goTo();
-// });
+Given('I am on homepage', async ({ homepagePo }: AllFixtures) => {
+  await homepagePo.goTo();
+});
 
-// Given('the home page is visible successfully', async ({ homepagePo }: AllFixtures) => {
-//   await homepagePo.shouldBeDisplayed();
-// });
+Given('the home page is visible successfully', async ({ homepagePo, loginPagePo }: AllFixtures) => {
+  await homepagePo.shouldBeDisplayed();
+  await loginPagePo.goTo();
+  await loginPagePo.shouldBeDisplayed();
+  await loginPagePo.logAs('miniga3780@ostahie.com', 'pa$$word');
+});
 
-// When('I click on {string} button', async ({ page }: AllFixtures, buttonName: string) => {
-//   if (buttonName === 'Products') {
-//     await page.getByRole('link', { name: 'Products' }).click();
-//   }
-// });
+When('I click on {string} button', async ({ page }: AllFixtures, buttonName: string) => {
+  if (buttonName === 'Products') {
+    await page.getByRole('link', { name: 'Products' }).click();
+  }
+});
 
-// Then('I am navigated to ALL PRODUCTS page successfully', async ({ productsPagePo }: AllFixtures) => {
-//   await productsPagePo.shouldBeDisplayed();
-// });
+Then('I am navigated to ALL PRODUCTS page successfully', async ({ productsPagePo }: AllFixtures) => {
+  await productsPagePo.shouldBeDisplayed();
+});
 
-// Then('the products list is visible', async ({ productsPagePo }: AllFixtures) => {
-//   const isVisible = await productsPagePo.isProductsListVisible();
-//   expect(isVisible).toBe(true);
-// });
+Then('the products list is visible', async ({ productsPagePo }: AllFixtures) => {
+  const isVisible = await productsPagePo.isProductsListVisible();
+  expect(isVisible).toBe(true);
+});
 
-// When('I hover over the first product and click {string}', async ({ productsPagePo }: AllFixtures, buttonName: string) => {
-//   if (buttonName === 'Add to cart') {
-//     await productsPagePo.addFirstProductToCart();
-//   }
-// });
+When('I hover over {string} product', async ({ productsPagePo }: AllFixtures, productOrder: string) => {
+  if (productOrder === 'first') {
+    await productsPagePo.addFirstProductToCart();
+  } else if (productOrder === 'second') {
+    await productsPagePo.addSecondProductToCart();
+  }
+});
 
-// When('I click Continue Shopping button', async ({ productsPagePo }: AllFixtures) => {
-//   await productsPagePo.continueShopping();
-// });
+When('I click Add to cart button on {string} product', async ({ productsPagePo }: AllFixtures, productOrder: string) => {
+  if (productOrder === 'first') {
+    await productsPagePo.addFirstProductToCart();
+  } else if (productOrder === 'second') {
+    await productsPagePo.addSecondProductToCart();
+  }
+});
 
-// When('I hover over the second product and click {string}', async ({ productsPagePo }: AllFixtures, buttonName: string) => {
-//   if (buttonName === 'Add to cart') {
-//     await productsPagePo.addSecondProductToCart();
-//   }
-// });
+When('I handle: added to cart modal', async ({ cartPagePo }: AllFixtures) => {
+  await cartPagePo.handleAddedToCartModal();
+});
 
-// When('I click View Cart button', async ({ productsPagePo }: AllFixtures) => {
-//   await productsPagePo.viewCart();
-// });
+When('I click Continue Shopping in modal', async ({ cartPagePo }: AllFixtures) => {
+  await cartPagePo.clickContinueShoppingInModal();
+});
 
-// Then('both products are added to Cart', async ({ cartPagePo }: AllFixtures) => {
-//   const productCount = await cartPagePo.getProductCount();
-//   expect(productCount).toBe(2);
-// });
+When('I click View Cart in modal', async ({ cartPagePo }: AllFixtures) => {
+  await cartPagePo.clickViewCartInModal();
+});
 
-// Then('their prices are displayed correctly', async ({ cartPagePo }: AllFixtures) => {
-//   const firstProductPrice = await cartPagePo.getProductPriceById('1');
-//   const secondProductPrice = await cartPagePo.getProductPriceById('2');
+Then('both products are added to Cart', async ({ cartPagePo }: AllFixtures) => {
+  const productCount = await cartPagePo.getProductCount();
+  expect(productCount).toBe(2);
+});
+
+Then('their prices are displayed correctly', async ({ cartPagePo }: AllFixtures) => {
+  const firstProductPrice = await cartPagePo.getProductPriceByName('Sleeveless Dress');
+  const secondProductPrice = await cartPagePo.getProductPriceByName('Stylish Dress');
   
-//   expect(firstProductPrice).toContain('Rs. 500');
-//   expect(secondProductPrice).toContain('Rs. 400');
-// });
-
-// Then('their quantities are displayed correctly', async ({ cartPagePo }: AllFixtures) => {
-//   const firstProductQuantity = await cartPagePo.getProductQuantity('Blue Top');
-//   const secondProductQuantity = await cartPagePo.getProductQuantity('Men Tshirt');
+  console.log('First product price found:', firstProductPrice);
+  console.log('Second product price found:', secondProductPrice);
   
-//   expect(firstProductQuantity).toBe('1');
-//   expect(secondProductQuantity).toBe('1');
-// });
+  expect(firstProductPrice).toContain('Rs. 1000');
+  expect(secondProductPrice).toContain('Rs. 1500');
+});
 
-// Then('their total price is calculated correctly', async ({ cartPagePo }: AllFixtures) => {
-//   const totalPrice = await cartPagePo.getTotalPrice();
-//   expect(totalPrice).toContain('Rs. 900');
-// });
+Then('their quantities are displayed correctly', async ({ cartPagePo }: AllFixtures) => {
+  const firstProductQuantity = await cartPagePo.getProductQuantity('Sleeveless Dress');
+  const secondProductQuantity = await cartPagePo.getProductQuantity('Stylish Dress');
+  
+  console.log('First product quantity found:', firstProductQuantity);
+  console.log('Second product quantity found:', secondProductQuantity);
+  
+  expect(firstProductQuantity).toBe('1');
+  expect(secondProductQuantity).toBe('1');
+});
+
+Then('their total price is calculated correctly', async ({ cartPagePo, checkoutPagePo }: AllFixtures) => {  
+  await cartPagePo.proceedToCheckout();
+  await checkoutPagePo.shouldBeDisplayed();
+  const totalPrice = await checkoutPagePo.getTotalPrice();
+  console.log('Total price found:', totalPrice);
+  expect(totalPrice).toContain('Rs. 2500');
+});
