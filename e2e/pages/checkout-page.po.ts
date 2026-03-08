@@ -32,7 +32,7 @@ export class CheckoutPagePo extends BasePo {
   }
 
   get totalPrice() {
-    return this.page.locator('table#cart_info_table tbody tr').locator('.cart_total_price');
+    return this.page.locator('tr', { hasText: 'Total Amount' }).locator('.cart_total_price');
   }
 
   get subtotalPrice() {
