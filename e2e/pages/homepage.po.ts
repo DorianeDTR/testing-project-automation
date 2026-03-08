@@ -8,12 +8,8 @@ export class HomepagePo extends BasePo {
   }
 
   // Locators
-  get pageLocator(): Locator {
-    return this.page.locator('a[href="/"]');
-  }
-
   get homepageContainer() {
-    return this.page.locator('#slider-carousel[');
+    return this.page.locator('#slider-carousel');
   }
 
   get featuresItems() {
@@ -31,15 +27,8 @@ export class HomepagePo extends BasePo {
   }
   
   async shouldBeDisplayed() {
-    // await this.page.waitForURL('**/', { waitUntil: 'domcontentloaded' });
     await this.ensurePageReady();
-
-    console.log('DEBUG: Starting slider check...');
-    // await this.homepageContainer.waitFor({ state: 'attached', timeout: 10000 });
-    // await expect(this.homepageContainer).toBeVisible();
-    // await expect(this.featuresItems).toBeVisible();
-    // await expect(this.header).toBeVisible();
-    await expect(this.pageLocator).toBeVisible();
+    await expect(this.homepageContainer).toBeVisible();
   }
 
   async isHomepageFullyLoaded(): Promise<boolean> {
