@@ -6,7 +6,7 @@ export class ProductsPagePo extends BasePo {
     super(page);
   }
 
-  // Locators using getters
+  // Locators
   get productsButton() {
     return this.page.getByRole('link', { name: 'Products' });
   }
@@ -23,14 +23,6 @@ export class ProductsPagePo extends BasePo {
     return this.page.getByRole('button', { name: 'Add to cart' });
   }
 
-  get continueShoppingButton() {
-    return this.page.getByRole('button', { name: 'Continue Shopping' });
-  }
-
-  // get viewCartButton() {
-  //   return this.page.getByRole('link', { name: 'View Cart' });
-  // }
-
   get allProductsHeader() {
     return this.page.getByText('All Products');
   }
@@ -39,41 +31,32 @@ export class ProductsPagePo extends BasePo {
     return this.page.locator('.features_items');
   }
 
-  // Navigation method
+  // Actions
   async goTo(): Promise<void> {
     await this.navigateWithConsent('https://automationexercise.com/products');
   }
 
-  // Page verification method
   async shouldBeDisplayed(): Promise<void> {
     await this.ensurePageReady();
     await expect(this.allProductsHeader).toBeVisible();
     await expect(this.productsList).toBeVisible();
   }
 
-  // High-level action methods
   async navigateToProducts(): Promise<void> {
     await this.productsButton.click();
   }
 
   async addFirstProductToCart(): Promise<void> {
     await this.ensurePageReady();
-    // Target specific product by data-product-id and use force click
     const firstProductAddToCart = this.page.locator('.productinfo >> a[data-product-id="3"]');
     await firstProductAddToCart.click({ force: true });
   }
 
   async addSecondProductToCart(): Promise<void> {
     await this.ensurePageReady();
-    // Target specific product by data-product-id and use force click
     const secondProductAddToCart = this.page.locator('.productinfo >> a[data-product-id="4"]');
     await secondProductAddToCart.click({ force: true });
   }
-
-  // async viewCart(): Promise<void> {
-  //   await this.ensurePageReady();
-  //   await this.viewCartButton.click({ force: true });
-  // }
 
   async isProductsListVisible(): Promise<boolean> {
     return await this.productsList.isVisible();

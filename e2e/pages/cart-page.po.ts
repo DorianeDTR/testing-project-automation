@@ -6,7 +6,7 @@ export class CartPagePo extends BasePo {
     super(page);
   }
 
-  // Locators using getters
+  // Locators
   get cartLink() {
     return this.page.getByRole('link', { name: 'Cart' });
   }
@@ -47,7 +47,6 @@ export class CartPagePo extends BasePo {
     return this.page.locator('#cart_items');
   }
 
-  // Modal/Pop-up locators for better UX
   get addedToCartModal() {
     return this.page.locator('.modal-content');
   }
@@ -64,25 +63,22 @@ export class CartPagePo extends BasePo {
     return this.page.locator('.modal-header .close-modal');
   }
 
-  // Navigation method
+  // Actions
   async goTo(): Promise<void> {
     await this.page.goto('/view_cart');
     await this.navigateWithConsent('https://automationexercise.com/view_cart');
   }
 
-  // Page verification method
   async shouldBeDisplayed(): Promise<void> {
     await expect(this.cartContainer).toBeVisible();
   }
 
-  // High-level action methods
   async navigateToCart(): Promise<void> {
     await this.cartLink.click();
   }
 
   async handleAddedToCartModal(): Promise<void> {
     await this.ensurePageReady();
-    // Wait for modal to appear
     await this.addedToCartModal.waitFor({ state: 'visible', timeout: 5000 });
   }
 
@@ -94,7 +90,6 @@ export class CartPagePo extends BasePo {
   async clickViewCartInModal(): Promise<void> {
     await this.ensurePageReady();
     await this.modalViewCartButton.click({ force: true });
-    // Wait for cart page to load and products to be visible
     await this.page.waitForLoadState('networkidle');
     await this.productRows.first().waitFor({ state: 'visible', timeout: 5000 });
   }
@@ -112,32 +107,25 @@ export class CartPagePo extends BasePo {
     return await this.productRows.count();
   }
 
-  // Dans CartPo
   async getProductPriceById(productId: string): Promise<string> {
-    // On cible directement la ligne par son ID unique (ex: #product-1)
     const productRow = this.page.locator(`tr#product-${productId}`);
     const price = await productRow.locator('.cart_price').textContent();
     return price?.trim() || '';
   }
 
   async getProductPriceByName(productName: string): Promise<string> {
-    // Get price by product name instead of ID
     const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
     const price = await productRow.locator('.cart_price').textContent();
     return price?.trim() || '';
   }
 
   async getProductPriceByProductId(productId: string): Promise<string> {
-    // Get price by product ID for consistency with quantity lookup
     const productRow = this.page.locator(`tr#product-${productId}`);
     const price = await productRow.locator('.cart_price').textContent();
     return price?.trim() || '';
   }
 
   async getProductQuantity(name: string): Promise<string> {
-    // const productRow = this.page.locator(`#cart_info_table tr#product-${productId}`);
-    // return await productRow.locator('.cart_quantity').inputValue() || '';
-
     const row = this.page.locator('tr', { hasText: name });
     
     const quantityLocator = row.locator('td.cart_quantity button.disabled'); 
@@ -149,12 +137,10 @@ export class CartPagePo extends BasePo {
 
   async getProductQuantityByName(productName: string): Promise<string> {
     const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
-    // Try to find quantity in different possible ways
     const quantityInput = await productRow.locator('td.cart_quantity input').inputValue().catch(() => '');
     if (quantityInput) {
       return quantityInput;
     }
-    // If not input, try to get text content
     const quantityText = await productRow.locator('td.cart_quantity').textContent().catch(() => '');
     return quantityText?.trim() || '';
   }
@@ -173,8 +159,6 @@ export class CartPagePo extends BasePo {
     await this.ensurePageReady();
     await this.proceedToCheckoutButton.waitFor({ state: 'visible', timeout: 5000 });
     await this.proceedToCheckoutButton.click();
-    // Use navigation method to handle consent properly
-    await this.navigateWithConsent('https://automationexercise.com/checkout');
   }
 
   async continueShopping(): Promise<void> {
@@ -186,11 +170,8 @@ export class CartPagePo extends BasePo {
   }
 
   async getTotalPrice(): Promise<string> {
-    // On cible spécifiquement le paragraphe .cart_total_price 
-    // qui se trouve dans la toute dernière ligne du tableau
     const totalPriceLocator = this.page.locator('table#cart_info_table tbody tr').last().locator('.cart_total_price');
     
-    // Attente de visibilité pour éviter le "flaky"
     await expect(totalPriceLocator).toBeVisible();
     
     const text = await totalPriceLocator.innerText();

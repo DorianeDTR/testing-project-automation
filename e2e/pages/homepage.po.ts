@@ -7,6 +7,7 @@ export class HomepagePo extends BasePo {
     return this.page.locator('a[href="/"]');
   }
 
+  // Locators
   get homepageContainer() {
     return this.page.locator('#slider-carousel[data-ride="carousel"]');
   }
@@ -23,7 +24,7 @@ export class HomepagePo extends BasePo {
     super(page);
   }
 
-  // Navigation method
+  // Actions
   async goTo(): Promise<void> {
     await this.navigateWithConsent('https://automationexercise.com/');
   }

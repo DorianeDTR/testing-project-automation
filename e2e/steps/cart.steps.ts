@@ -68,9 +68,6 @@ Then('their prices are displayed correctly', async ({ cartPagePo }: AllFixtures)
   const firstProductPrice = await cartPagePo.getProductPriceByName('Sleeveless Dress');
   const secondProductPrice = await cartPagePo.getProductPriceByName('Stylish Dress');
   
-  console.log('First product price found:', firstProductPrice);
-  console.log('Second product price found:', secondProductPrice);
-  
   expect(firstProductPrice).toContain('Rs. 1000');
   expect(secondProductPrice).toContain('Rs. 1500');
 });
@@ -79,9 +76,6 @@ Then('their quantities are displayed correctly', async ({ cartPagePo }: AllFixtu
   const firstProductQuantity = await cartPagePo.getProductQuantity('Sleeveless Dress');
   const secondProductQuantity = await cartPagePo.getProductQuantity('Stylish Dress');
   
-  console.log('First product quantity found:', firstProductQuantity);
-  console.log('Second product quantity found:', secondProductQuantity);
-  
   expect(firstProductQuantity).toBe('1');
   expect(secondProductQuantity).toBe('1');
 });
@@ -89,7 +83,7 @@ Then('their quantities are displayed correctly', async ({ cartPagePo }: AllFixtu
 Then('their total price is calculated correctly', async ({ cartPagePo, checkoutPagePo }: AllFixtures) => {  
   await cartPagePo.proceedToCheckout();
   await checkoutPagePo.shouldBeDisplayed();
+  
   const totalPrice = await checkoutPagePo.getTotalPrice();
-  console.log('Total price found:', totalPrice);
   expect(totalPrice).toContain('Rs. 2500');
 });

@@ -6,11 +6,7 @@ export class CheckoutPagePo extends BasePo {
     super(page);
   }
 
-  // Locators for checkout elements
-  // get checkoutContainer() {
-  //   return this.page.locator('#cart_info');
-  // }
-
+  // Locators
   get checkoutSection() {
     return this.page.locator('section#cart_items');
   }
@@ -75,22 +71,18 @@ export class CheckoutPagePo extends BasePo {
     return this.page.locator('.order-number');
   }
 
-  // Navigation method
+  // Actions
   async goTo(): Promise<void> {
-    // await this.page.goto('/checkout');
     await this.navigateWithConsent('https://automationexercise.com/checkout');
   }
 
-  // Page verification method
   async shouldBeDisplayed(): Promise<void> {
     await expect(this.page).toHaveURL(/.*checkout/);
 
     await this.handleConsent();
     await expect(this.page.getByText('Review Your Order')).toBeVisible();
-    // await expect(this.page.locator('#cart_info_table')).toBeAttached();
   }
 
-  // High-level action methods
   async proceedToPayment(): Promise<void> {
     await this.ensurePageReady();
     await this.proceedToPaymentButton.click();
@@ -143,9 +135,4 @@ export class CheckoutPagePo extends BasePo {
     const text = await this.orderConfirmationNumber.textContent();
     return text?.trim() || '';
   }
-
-  // async ensurePageReady(): Promise<void> {
-  //   await this.page.waitForLoadState('networkidle');
-  //   await this.checkoutSection.waitFor({ state: 'visible', timeout: 10000 });
-  // }
 }
