@@ -171,9 +171,13 @@ export class CartPagePo extends BasePo {
   }
 
   async getTotalPrice(): Promise<string> {
+    await this.ensurePageReady();
+
     const totalPriceLocator = this.page.locator('table#cart_info_table tbody tr').last().locator('.cart_total_price');
     
     await expect(totalPriceLocator).toBeVisible();
+    
+    await expect(totalPriceLocator).not.toHaveText('Rs. 0', { timeout: 10000 });
     
     const text = await totalPriceLocator.innerText();
     console.log('Total price found:', text);
