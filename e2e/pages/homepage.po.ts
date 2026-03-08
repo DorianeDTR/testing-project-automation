@@ -3,11 +3,15 @@ import { expect, Page, Locator } from '@playwright/test';
 import { BasePo } from "./base.po";
 
 export class HomepagePo extends BasePo {
+  constructor(page: Page) {
+    super(page);
+  }
+
+  // Locators
   get pageLocator(): Locator {
     return this.page.locator('a[href="/"]');
   }
 
-  // Locators
   get homepageContainer() {
     return this.page.locator('#slider-carousel[');
   }
@@ -20,9 +24,6 @@ export class HomepagePo extends BasePo {
     return this.page.locator('header');
   }
   
-  constructor(page: Page) {
-    super(page);
-  }
 
   // Actions
   async goTo(): Promise<void> {
