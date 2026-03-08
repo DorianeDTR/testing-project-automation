@@ -157,8 +157,15 @@ export class CartPagePo extends BasePo {
 
   async proceedToCheckout(): Promise<void> {
     await this.ensurePageReady();
-    await this.proceedToCheckoutButton.waitFor({ state: 'visible', timeout: 5000 });
+    // await this.proceedToCheckoutButton.waitFor({ state: 'visible', timeout: 5000 });
     await this.proceedToCheckoutButton.click();
+
+    const loginModal = this.page.getByText('Checkout Login');
+    if (await loginModal.isVisible({ timeout: 2000 })) {
+        // Si elle est là, on clique sur "Register / Login" pour continuer
+        // Ou tu peux adapter selon ton scénario (ex: se connecter d'abord)
+        await this.page.getByRole('link', { name: 'Signup / Login' }).click();
+    }
   }
 
   async continueShopping(): Promise<void> {
