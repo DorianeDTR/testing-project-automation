@@ -170,20 +170,6 @@ export class CartPagePo extends BasePo {
     return await this.emptyCartMessage.isVisible();
   }
 
-  async getTotalPrice(): Promise<string> {
-    await this.ensurePageReady();
-
-    const totalPriceLocator = this.page.locator('table#cart_info_table tbody tr').last().locator('.cart_total_price');
-    
-    await expect(totalPriceLocator).toBeVisible();
-    
-    await expect(totalPriceLocator).not.toHaveText('Rs. 0', { timeout: 10000 });
-    
-    const text = await totalPriceLocator.innerText();
-    console.log('Total price found:', text);
-    return text.trim();
-  }
-
   async isProductInCart(productName: string): Promise<boolean> {
     const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
     return await productRow.isVisible();
