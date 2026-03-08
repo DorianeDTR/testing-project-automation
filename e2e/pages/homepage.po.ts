@@ -31,6 +31,7 @@ export class HomepagePo extends BasePo {
   
   async shouldBeDisplayed() {
     await this.ensurePageReady();
+    await this.homepageContainer.waitFor({ state: 'attached', timeout: 10000 });
     await expect(this.homepageContainer).toBeVisible();
     await expect(this.featuresItems).toBeVisible();
     await expect(this.header).toBeVisible();
