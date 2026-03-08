@@ -84,6 +84,8 @@ Then('their total price is calculated correctly', async ({ cartPagePo, checkoutP
   await cartPagePo.proceedToCheckout();
   await checkoutPagePo.shouldBeDisplayed();
   
-  const totalPrice = await checkoutPagePo.getTotalPrice();
-  expect(totalPrice).toContain('Rs. 2500');
+  // const totalPrice = await checkoutPagePo.getTotalPrice();
+  // expect(totalPrice).toContain('Rs. 2500');
+
+  await expect(checkoutPagePo.totalPrice).toContainText('Rs. 2500', { timeout: 10000 });
 });
