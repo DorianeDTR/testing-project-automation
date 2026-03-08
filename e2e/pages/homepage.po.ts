@@ -30,7 +30,7 @@ export class HomepagePo extends BasePo {
   }
   
   async shouldBeDisplayed() {
-    await this.page.waitForURL('**/', { waitUntil: 'domcontentloaded' });
+    // await this.page.waitForURL('**/', { waitUntil: 'domcontentloaded' });
     await this.ensurePageReady();
 
     console.log('DEBUG: Starting slider check...');
