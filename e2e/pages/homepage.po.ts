@@ -9,7 +9,7 @@ export class HomepagePo extends BasePo {
 
   // Locators
   get homepageContainer() {
-    return this.page.locator('#slider-carousel[data-ride="carousel"]');
+    return this.page.locator('#slider-carousel[');
   }
 
   get featuresItems() {
@@ -30,7 +30,10 @@ export class HomepagePo extends BasePo {
   }
   
   async shouldBeDisplayed() {
+    await this.page.waitForURL('**/', { waitUntil: 'domcontentloaded' });
     await this.ensurePageReady();
+
+    console.log('DEBUG: Starting slider check...');
     await this.homepageContainer.waitFor({ state: 'attached', timeout: 10000 });
     await expect(this.homepageContainer).toBeVisible();
     await expect(this.featuresItems).toBeVisible();
