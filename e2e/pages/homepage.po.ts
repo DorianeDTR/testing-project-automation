@@ -9,7 +9,7 @@ export class HomepagePo extends BasePo {
 
   // Locators
   get homepageContainer() {
-    return this.page.locator('#slider-carousel');
+    return this.page.locator('body');
   }
 
   get featuresItems() {
