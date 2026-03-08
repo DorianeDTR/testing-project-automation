@@ -157,8 +157,10 @@ export class CartPagePo extends BasePo {
 
   async proceedToCheckout(): Promise<void> {
     await this.ensurePageReady();
+
+    await this.proceedToCheckoutButton.waitFor({ state: 'visible' });
+
     await this.proceedToCheckoutButton.click();
-    await this.navigateWithConsent('https://automationexercise.com/checkout');
   }
 
   async continueShopping(): Promise<void> {

@@ -122,7 +122,8 @@ export class CheckoutPagePo extends BasePo {
   async getTotalPrice(): Promise<string> {
     await this.ensurePageReady();
 
-    await expect(this.totalPrice).toBeVisible({ timeout: 10000 });
+    // await expect(this.totalPrice).toBeVisible({ timeout: 10000 });
+    await expect(this.totalPrice).not.toHaveText('Rs. 0', { timeout: 15000 });
     const text = await this.totalPrice.innerText();
     console.log('Checkout total price found:', text);
     return text.trim();
