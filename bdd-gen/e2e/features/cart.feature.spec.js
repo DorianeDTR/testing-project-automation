@@ -3,7 +3,7 @@ import { pageFixtures as test } from "../../../e2e/support/fixtures.ts";
 
 test.describe('Add Products in Cart', () => {
 
-  test('Add two different products to cart', { tag: ['@Automated'] }, async ({ Given, When, Then, And, cartPagePo, checkoutPagePo, homepagePo, loginPagePo, page, productsPagePo }) => { 
+  test('Add two different products to cart', { tag: ['@Automated'] }, async ({ Given, When, Then, And, accountCreatedPagePo, cartPagePo, checkoutPagePo, headerPagePo, homepagePo, loginPagePo, page, productsPagePo, signupPagePo }) => { 
     await Given('I am on homepage', null, { homepagePo }); 
     await And('the home page is visible successfully', null, { homepagePo, loginPagePo }); 
     await When('I click on \'Products\' button', null, { page }); 
@@ -20,7 +20,7 @@ test.describe('Add Products in Cart', () => {
     await Then('both products are added to Cart', null, { cartPagePo }); 
     await And('their prices are displayed correctly', null, { cartPagePo }); 
     await And('their quantities are displayed correctly', null, { cartPagePo }); 
-    await And('their total price is calculated correctly', null, { cartPagePo, checkoutPagePo }); 
+    await And('their total price is calculated correctly', null, { accountCreatedPagePo, cartPagePo, checkoutPagePo, headerPagePo, homepagePo, signupPagePo }); 
   });
 
 });

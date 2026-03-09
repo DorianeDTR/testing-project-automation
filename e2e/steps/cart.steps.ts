@@ -82,12 +82,30 @@ Then('their quantities are displayed correctly', async ({ cartPagePo }: AllFixtu
   expect(secondProductQuantity).toBe('1');
 });
 
-Then('their total price is calculated correctly', async ({ cartPagePo, checkoutPagePo }: AllFixtures) => {  
+Then('their total price is calculated correctly', async ({ cartPagePo, checkoutPagePo, signupPagePo, accountCreatedPagePo, homepagePo, headerPagePo }: AllFixtures) => {  
   await cartPagePo.proceedToCheckout();
+  
+  await checkoutPagePo.handleCheckoutModal();
+  await signupPagePo.shouldBeDisplayed();
+
+  const testEmail = 'miniga3780@ostahie.com';
+  await signupPagePo.fillNewUserForm('JohnDoe', testEmail);
+
+  await signupPagePo.fillAccountInfoForm(
+    'JohnDoe', '', 'pa$$word', 'John', 'Doe', 
+    '', 'Here and there', '', 'Canada', 'Gironde', 'Bordeaux', '33000', '0123456789'
+  );
+
+  await accountCreatedPagePo.validateAccountCreation();
+  await accountCreatedPagePo.clickContinue();
+  await homepagePo.shouldBeDisplayed();
+  await headerPagePo.navigateToCart();
+
+  await cartPagePo.shouldBeDisplayed();
+  await cartPagePo.proceedToCheckout();
+  
   await checkoutPagePo.shouldBeDisplayed();
   
-  // const totalPrice = await checkoutPagePo.getTotalPrice();
-  // expect(totalPrice).toContain('Rs. 2500');
-
-  
+  const totalPrice = await checkoutPagePo.getTotalPrice();
+  expect(totalPrice).toContain('Rs. 2500');
 });

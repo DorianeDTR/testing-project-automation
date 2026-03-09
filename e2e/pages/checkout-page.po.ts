@@ -11,12 +11,12 @@ export class CheckoutPagePo extends BasePo {
     return this.page.locator('section#cart_items');
   }
 
-  get loginModal() {
-    return this.page.getByText('Register / Login');
+  get checkoutModal() {
+    return this.page.locator('.modal-content');
   }
 
-  get signupLoginLink() {
-    return this.page.getByRole('link', { name: 'Signup / Login' });
+  get modalRegisterLink() {
+    return this.page.getByRole('link', { name: 'Register / Login' });
   }
 
   get deliveryAddressSection() {
@@ -85,11 +85,12 @@ export class CheckoutPagePo extends BasePo {
     // await this.navigateWithConsent('https://automationexercise.com/checkout');
   }
 
-  async handleLoginModal(): Promise<void> {
-    const loginModal = this.loginModal;
-    if (await loginModal.isVisible({ timeout: 2000 })) {
-      await this.signupLoginLink.click();
-      console.log('✅ Login modal handled - clicked Signup / Login');
+  async handleCheckoutModal(): Promise<void> {
+    await this.ensurePageReady();
+    const checkoutModal = this.checkoutModal;
+    if (await checkoutModal.isVisible({ timeout: 2000 })) {
+      await this.modalRegisterLink.click();
+      console.log('✅ Checkout modal handled - clicked Register / Login');
     }
   }
 
@@ -97,7 +98,7 @@ export class CheckoutPagePo extends BasePo {
     await expect(this.page).toHaveURL(/.*checkout/);
 
     await this.handleConsent();
-    await this.handleLoginModal();
+    await this.handleCheckoutModal();
     await expect(this.page.getByText('Review Your Order')).toBeVisible();
   }
 
