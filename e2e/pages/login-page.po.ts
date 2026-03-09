@@ -5,6 +5,11 @@ import { BasePo } from "./base.po";
 
 export class LoginPagePo extends BasePo {
   private auth = new Auth();
+  constructor(page: Page) {
+    super(page);
+  }
+
+  // Locators
   get pageLocator() {
     return this.page.locator('.login-form');
   }
@@ -18,10 +23,7 @@ export class LoginPagePo extends BasePo {
     return this.page.locator('button[data-qa="login-button"]');
   }
   
-  constructor(page: Page) {
-    super(page);
-  }
-
+  // Actions
   async goTo() {
     await this.navigateWithConsent('https://automationexercise.com/login');
   }
