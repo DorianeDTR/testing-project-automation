@@ -1,6 +1,21 @@
 {
     "john": {
-        "login": "<todo>",
-        "password": "<todo>"
+        "title": "<todo>",
+        "name": "<todo>",
+        "email": "<todo>",
+        "password": "<todo>",
+        "dateOfBirth": "<todo>",
+        "newsletter": "<todo>",
+        "partnersOffers": "<todo>",
+        "firstName": "<todo>",
+        "lastName": "<todo>",
+        "company": "<todo>",
+        "address": "<todo>",
+        "address2": "<todo>",
+        "country": "<todo>",
+        "state": "<todo>",
+        "city": "<todo>",
+        "zipcode": "<todo>",
+        "mobileNumber": "<todo>"
   }
 }

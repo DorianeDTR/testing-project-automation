@@ -1,6 +1,24 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { BasePo } from './base.po';
 
+interface UserData {
+  title?: string;
+  name: string;
+  email: string;
+  password: string;
+  dateOfBirth?: string;
+  firstName: string;
+  lastName: string;
+  company?: string;
+  address: string;
+  address2?: string;
+  country: string;
+  state: string;
+  city: string;
+  zipcode: string;
+  mobileNumber: string;
+}
+
 export class SignupPagePo extends BasePo {
   constructor(page: Page) {
     super(page);
@@ -77,50 +95,64 @@ export class SignupPagePo extends BasePo {
     await expect(this.signupContainer).toBeVisible();
   }
 
+  async verifyNewUserSignupTitle(): Promise<void> {
+    const signupTitle = this.page.locator('h2:has-text("New User Signup!")');
+    await expect(signupTitle).toBeVisible();
+  }
+
+  async verifyAccountInfoTitle(): Promise<void> {
+    const accountInfoTitle = this.page.locator('b:has-text("Enter Account Information")');
+    await expect(accountInfoTitle).toBeVisible();
+  }
+
+  async selectTitle(title: string): Promise<void> {
+    await this.page.locator(`input[name="title"][value="${title}"]`).check();
+  }
+
+  async selectNewsletterCheckbox(): Promise<void> {
+    await this.page.locator('input[name="newsletter"]').check();
+  }
+
+  async selectOptinCheckbox(): Promise<void> {
+    await this.page.locator('input[name="optin"]').check();
+  }
+
   // New User Signup 
-  async fillNewUserForm(name: string, email: string): Promise<void> {
+  async fillNewUserForm(user: UserData): Promise<void> {
     await this.ensurePageReady();
-    await this.signupNameInput.fill(name);
-    await this.signupEmailInput.fill(email);
+    await this.signupNameInput.fill(user.name);
+    await this.signupEmailInput.fill(user.email);
     await this.signupButton.click();
     await this.page.waitForLoadState('networkidle');
   }
 
-
   // Account Information
   async fillAccountInfoForm(
-    name: string,
-    email: string,
-    password: string,
-    firstName: string, 
-    lastName: string, 
-    company: string, 
-    address: string, 
-    address2: string, 
-    country: string, 
-    state: string, 
-    city: string, 
-    zipcode: string, 
-    mobileNumber: string): Promise<void> {
+    user: UserData): Promise<void> {
     await this.ensurePageReady();
-    await this.nameInput.fill(name);
-    // await this.emailInput.fill(email);
+    await this.nameInput.fill(user.name);
     if (await this.emailInput.isEditable()) {
-      await this.emailInput.fill(email);
+      await this.emailInput.fill(user.email);
     } else {
       console.log('ℹ️ Email field is disabled (pre-filled), skipping fill action.');
     }
-    await this.passwordInput.fill(password);
-    await this.firstNameInput.fill(firstName);
-    await this.lastNameInput.fill(lastName);
-    await this.companyInput.fill(company);
-    await this.addressInput.fill(address);
-    await this.address2Input.fill(address2);
-    await this.countrySelect.selectOption(country);
-    await this.stateInput.fill(state);
-    await this.cityInput.fill(city);
-    await this.zipcodeInput.fill(zipcode);
-    await this.mobileNumberInput.fill(mobileNumber);
+    await this.passwordInput.fill(user.password);
+    await this.firstNameInput.fill(user.firstName);
+    await this.lastNameInput.fill(user.lastName);
+    // await this.companyInput.fill(user.company);
+    if (user.company) {
+      await this.companyInput.fill(user.company);
+    }
+    await this.addressInput.fill(user.address);
+    // await this.address2Input.fill(user.address2);
+    if (user.address2) {
+      await this.address2Input.fill(user.address2);
+    }
+    await this.countrySelect.selectOption(user.country);
+    await this.stateInput.fill(user.state);
+    await this.cityInput.fill(user.city);
+    await this.zipcodeInput.fill(user.zipcode);
+    await this.mobileNumberInput.fill(user.mobileNumber);
     await this.createAccountButton.click();
   }
 }
