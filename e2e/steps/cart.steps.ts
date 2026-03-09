@@ -109,3 +109,4 @@ Then('their total price is calculated correctly', async ({ cartPagePo, checkoutP
   const totalPrice = await checkoutPagePo.getTotalPrice();
   expect(totalPrice).toContain('Rs. 2500');
 });
+
