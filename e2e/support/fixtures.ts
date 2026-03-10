@@ -7,7 +7,7 @@ import { CartPagePo } from "../pages/cart-page.po";
 import { ProductsPagePo } from "../pages/products-page.po";
 import { CheckoutPagePo } from "../pages/checkout-page.po";
 import { SignupPagePo } from "../pages/signup-page.po";
-import { AccountCreatedPagePo } from "../pages/account-created-page.po";
+import { AccountStatusPagePo } from "../pages/account-status-page.po";
 import { HeaderPagePo } from "../pages/header-page.po";
 
 interface Pages {
@@ -17,7 +17,7 @@ interface Pages {
   productsPagePo: ProductsPagePo;
   checkoutPagePo: CheckoutPagePo;
   signupPagePo: SignupPagePo;
-  accountCreatedPagePo: AccountCreatedPagePo;
+  accountStatusPagePo: AccountStatusPagePo;
   headerPagePo: HeaderPagePo;
 };
 
@@ -44,8 +44,8 @@ export const pageFixtures = base.extend<Pages>({
     signupPagePo: async ({ page }, use) => {
         await use(new SignupPagePo(page));
     },
-    accountCreatedPagePo: async ({ page }, use) => {
-        await use(new AccountCreatedPagePo(page));
+    accountStatusPagePo: async ({ page }, use) => {
+        await use(new AccountStatusPagePo(page));
     },
     headerPagePo: async ({ page }, use) => {
         await use(new HeaderPagePo(page));

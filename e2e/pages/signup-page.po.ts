@@ -101,6 +101,7 @@ export class SignupPagePo extends BasePo {
   }
 
   async verifyAccountInfoTitle(): Promise<void> {
+    await this.ensurePageReady();
     const accountInfoTitle = this.page.locator('b:has-text("Enter Account Information")');
     await expect(accountInfoTitle).toBeVisible();
   }

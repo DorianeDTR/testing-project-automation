@@ -82,22 +82,34 @@ Then('their quantities are displayed correctly', async ({ cartPagePo }: AllFixtu
   expect(secondProductQuantity).toBe('1');
 });
 
-Then('their total price is calculated correctly', async ({ cartPagePo, checkoutPagePo, signupPagePo, accountCreatedPagePo, homepagePo, headerPagePo }: AllFixtures) => {  
+Then('their total price is calculated correctly', async ({ cartPagePo, checkoutPagePo, signupPagePo, accountStatusPagePo, homepagePo, headerPagePo }: AllFixtures) => {  
   await cartPagePo.proceedToCheckout();
   
   await checkoutPagePo.handleCheckoutModal();
   await signupPagePo.shouldBeDisplayed();
 
-  const testEmail = 'miniga3780@ostahie.com';
-  await signupPagePo.fillNewUserForm('JohnDoe', testEmail);
+  const userData = {
+    name: 'JohnDoe',
+    email: 'miniga3780@ostahie.com',
+    password: 'pa$$word',
+    title: 'Mr',
+    firstName: 'John',
+    lastName: 'Doe',
+    company: '',
+    address: 'Here and there',
+    address2: '',
+    country: 'Canada',
+    state: 'Gironde',
+    city: 'Bordeaux',
+    zipcode: '33000',
+    mobileNumber: '0123456789'
+  };
 
-  await signupPagePo.fillAccountInfoForm(
-    'JohnDoe', '', 'pa$$word', 'John', 'Doe', 
-    '', 'Here and there', '', 'Canada', 'Gironde', 'Bordeaux', '33000', '0123456789'
-  );
+  await signupPagePo.fillNewUserForm(userData);
+  await signupPagePo.fillAccountInfoForm(userData);
 
-  await accountCreatedPagePo.validateAccountCreation();
-  await accountCreatedPagePo.clickContinue();
+  await accountStatusPagePo.validateAccountCreated();
+  await accountStatusPagePo.clickContinue();
   await homepagePo.shouldBeDisplayed();
   await headerPagePo.navigateToCart();
 

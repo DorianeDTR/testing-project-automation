@@ -3,7 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
-    /* C'est ici que la magie opère pour ton JSON */
+    
     "resolveJsonModule": true, 
     "esModuleInterop": true,
     

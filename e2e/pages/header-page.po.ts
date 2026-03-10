@@ -133,7 +133,7 @@ export class HeaderPagePo extends BasePo {
     return await this.loggedInUser.isVisible();
   }
 
-  async getLoggedInUserEmail(): Promise<string> {
+  async getLoggedInUserName(): Promise<string> {
     await this.ensurePageReady();
     const text = await this.loggedInUser.textContent();
     if (text) {
