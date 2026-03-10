@@ -30,23 +30,14 @@ When('I fill account details with exhaustive information', async ({ signupPagePo
     await signupPagePo.selectTitle(user.title);
   }
   await signupPagePo.fillAccountInfoForm(user);
-  await signupPagePo.selectNewsletterCheckbox();
-  await signupPagePo.selectOptinCheckbox();
+  // await signupPagePo.selectNewsletterCheckbox();
+  // await signupPagePo.selectOptinCheckbox();
 });
 
 // When('I select checkbox \'Sign up for our newsletter!\'', async ({ signupPagePo }: AllFixtures) => {
 // });
 
 // When('I select checkbox \'Receive special offers from our partners!\'', async ({ signupPagePo }: AllFixtures) => {
-// });
-
-// When('I fill address details with first name, last name, company, address, country, state, city, zipcode and mobile number', async ({ signupPagePo }: AllFixtures) => {
-//   // This is already handled in the fillAccountInfoForm method above
-//   // Keeping this step for completeness and readability
-// });
-
-// When('I click \'Create Account button\'', async ({ signupPagePo }: AllFixtures) => {
-//   // This is handled in fillAccountInfoForm method
 // });
 
 Then('account creation confirmation is displayed', async ({ accountStatusPagePo }: AllFixtures) => {
@@ -59,8 +50,7 @@ Then('account creation confirmation is displayed', async ({ accountStatusPagePo 
 
 When('I log in', async ({ headerPagePo }: AllFixtures) => {
   await headerPagePo.shouldBeDisplayed();
-  const isLoggedIn = await headerPagePo.isLoggedIn();
-  expect(isLoggedIn).toBe(true);
+  await expect (headerPagePo.loggedInUser).toBeVisible();
   
   const displayUserName = await headerPagePo.getLoggedInUserName();
   console.log('Logged in as:', displayUserName);

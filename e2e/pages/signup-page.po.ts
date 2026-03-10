@@ -110,13 +110,13 @@ export class SignupPagePo extends BasePo {
     await this.page.locator(`input[name="title"][value="${title}"]`).check();
   }
 
-  async selectNewsletterCheckbox(): Promise<void> {
-    await this.page.locator('input[name="newsletter"]').check();
-  }
+  // async selectNewsletterCheckbox(): Promise<void> {
+  //   await this.page.locator('input[name="newsletter"]').check({ force: true });
+  // }
 
-  async selectOptinCheckbox(): Promise<void> {
-    await this.page.locator('input[name="optin"]').check();
-  }
+  // async selectOptinCheckbox(): Promise<void> {
+  //   await this.page.locator('input[name="optin"]').check({ force: true });
+  // }
 
   // New User Signup 
   async fillNewUserForm(user: UserData): Promise<void> {

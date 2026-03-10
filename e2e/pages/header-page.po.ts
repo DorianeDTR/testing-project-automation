@@ -52,7 +52,8 @@ export class HeaderPagePo extends BasePo {
   }
 
   get loggedInUser() {
-    return this.page.locator('.navbar-right').locator('li').filter({ hasText: 'Logged in as' });
+    // return this.page.locator('.navbar-right').locator('li').filter({ hasText: 'Logged in as' });
+    return this.page.locator('.nav.navbar-nav > li').filter({ hasText: 'Logged in as' });
   }
 
   get deleteAccountLink() {
