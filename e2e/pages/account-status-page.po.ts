@@ -12,11 +12,13 @@ export class AccountStatusPagePo extends BasePo {
   }
 
   get accountCreatedMessage() {
-    return this.page.getByText('Account Created!');
+    // return this.page.getByText('Account Created!');
+    return this.page.locator('[data-qa="account-created"]');
   }
 
   get accountDeletedMessage() {
-    return this.page.getByText('Account Deleted!');
+    // return this.page.getByText('Account Deleted!');
+    return this.page.locator('[data-qa="account-deleted"]');
   }
 
   get continueButton() {
