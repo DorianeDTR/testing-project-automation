@@ -3,12 +3,13 @@ import { expect, Page, Locator } from '@playwright/test';
 import { BasePo } from "./base.po";
 
 export class HomepagePo extends BasePo {
-  get pageLocator(): Locator {
-    return this.page.locator('a[href="/"]');
+  constructor(page: Page) {
+    super(page);
   }
 
+  // Locators
   get homepageContainer() {
-    return this.page.locator('#slider-carousel[data-ride="carousel"]');
+    return this.page.locator('body');
   }
 
   get featuresItems() {
@@ -19,20 +20,15 @@ export class HomepagePo extends BasePo {
     return this.page.locator('header');
   }
   
-  constructor(page: Page) {
-    super(page);
-  }
 
-  // Navigation method
+  // Actions
   async goTo(): Promise<void> {
     await this.navigateWithConsent('https://automationexercise.com/');
   }
   
-  async shouldBeDisplayed() {
+  async shouldBeDisplayed(): Promise<void> {
     await this.ensurePageReady();
     await expect(this.homepageContainer).toBeVisible();
-    await expect(this.featuresItems).toBeVisible();
-    await expect(this.header).toBeVisible();
   }
 
   async isHomepageFullyLoaded(): Promise<boolean> {

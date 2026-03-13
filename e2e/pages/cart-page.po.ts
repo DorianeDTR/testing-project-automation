@@ -6,7 +6,7 @@ export class CartPagePo extends BasePo {
     super(page);
   }
 
-  // Locators using getters
+  // Locators
   get cartLink() {
     return this.page.getByRole('link', { name: 'Cart' });
   }
@@ -20,11 +20,15 @@ export class CartPagePo extends BasePo {
   }
 
   get proceedToCheckoutButton() {
-    return this.page.getByRole('button', { name: 'Proceed To Checkout' });
+    return this.page.getByText('Proceed To Checkout');
   }
 
   get continueShoppingButton() {
     return this.page.getByRole('button', { name: 'Continue Shopping' });
+  }
+
+  get viewCartButton() {
+    return this.page.getByRole('link', { name: 'View Cart' });
   }
 
   get deleteButton() {
@@ -36,48 +40,109 @@ export class CartPagePo extends BasePo {
   }
 
   get totalPrice() {
-    return this.page.locator('#cart_info_table .cart_total_price');
+    return this.page.locator('#cart_info .cart_total_price');
   }
 
   get cartContainer() {
     return this.page.locator('#cart_items');
   }
 
-  // Navigation method
-  async goTo(): Promise<void> {
-    await this.page.goto('/view_cart');
+  get addedToCartModal() {
+    return this.page.locator('.modal-content');
   }
 
-  // Page verification method
+  get modalContinueShoppingButton() {
+    return this.page.getByRole('button', { name: 'Continue Shopping' });
+  }
+
+  get modalViewCartButton() {
+    return this.page.getByRole('link', { name: 'View Cart' });
+  }
+
+  get modalCloseButton() {
+    return this.page.locator('.modal-header .close-modal');
+  }
+
+  // Actions
+  async goTo(): Promise<void> {
+    await this.page.goto('/view_cart');
+    await this.navigateWithConsent('https://automationexercise.com/view_cart');
+  }
+
   async shouldBeDisplayed(): Promise<void> {
     await expect(this.cartContainer).toBeVisible();
   }
 
-  // High-level action methods
   async navigateToCart(): Promise<void> {
     await this.cartLink.click();
+  }
+
+  async handleAddedToCartModal(): Promise<void> {
+    await this.ensurePageReady();
+    await this.addedToCartModal.waitFor({ state: 'visible', timeout: 5000 });
+  }
+
+  async clickContinueShoppingInModal(): Promise<void> {
+    await this.ensurePageReady();
+    await this.modalContinueShoppingButton.click({ force: true });
+  }
+
+  async clickViewCartInModal(): Promise<void> {
+    await this.ensurePageReady();
+    await this.modalViewCartButton.click({ force: true });
+    await this.page.waitForLoadState('networkidle');
+    await this.productRows.first().waitFor({ state: 'visible', timeout: 5000 });
+  }
+
+  async closeAddedToCartModal(): Promise<void> {
+    await this.ensurePageReady();
+    await this.modalCloseButton.click();
+  }
+
+  async isAddedToCartModalVisible(): Promise<boolean> {
+    return await this.addedToCartModal.isVisible();
   }
 
   async getProductCount(): Promise<number> {
     return await this.productRows.count();
   }
 
-  // async getProductPrice(productName: string): Promise<string> {
-  //   const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
-  //   return await productRow.locator('.cart_price').textContent() || '';
-  // }
-
-  // Dans CartPo
   async getProductPriceById(productId: string): Promise<string> {
-    // On cible directement la ligne par son ID unique (ex: #product-1)
     const productRow = this.page.locator(`tr#product-${productId}`);
     const price = await productRow.locator('.cart_price').textContent();
     return price?.trim() || '';
   }
 
-  async getProductQuantity(productName: string): Promise<string> {
+  async getProductPriceByName(productName: string): Promise<string> {
     const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
-    return await productRow.locator('input[name="quantity"]').inputValue() || '';
+    const price = await productRow.locator('.cart_price').textContent();
+    return price?.trim() || '';
+  }
+
+  async getProductPriceByProductId(productId: string): Promise<string> {
+    const productRow = this.page.locator(`tr#product-${productId}`);
+    const price = await productRow.locator('.cart_price').textContent();
+    return price?.trim() || '';
+  }
+
+  async getProductQuantity(name: string): Promise<string> {
+    const row = this.page.locator('tr', { hasText: name });
+    
+    const quantityLocator = row.locator('td.cart_quantity button.disabled'); 
+    
+    await expect(quantityLocator).not.toHaveText(''); 
+    
+    return await quantityLocator.innerText();
+  }
+
+  async getProductQuantityByName(productName: string): Promise<string> {
+    const productRow = this.page.locator(`#cart_info_table tr:has-text("${productName}")`);
+    const quantityInput = await productRow.locator('td.cart_quantity input').inputValue().catch(() => '');
+    if (quantityInput) {
+      return quantityInput;
+    }
+    const quantityText = await productRow.locator('td.cart_quantity').textContent().catch(() => '');
+    return quantityText?.trim() || '';
   }
 
   async updateProductQuantity(productName: string, quantity: string): Promise<void> {
@@ -91,7 +156,13 @@ export class CartPagePo extends BasePo {
   }
 
   async proceedToCheckout(): Promise<void> {
-    await this.proceedToCheckoutButton.click();
+    await this.ensurePageReady();
+
+    await this.proceedToCheckoutButton.waitFor({ state: 'visible' });
+
+    await this.proceedToCheckoutButton.click({ force: true });
+    await this.handleConsent();
+    console.log('✅ Clicked Proceed to Checkout');
   }
 
   async continueShopping(): Promise<void> {
@@ -100,10 +171,6 @@ export class CartPagePo extends BasePo {
 
   async isCartEmpty(): Promise<boolean> {
     return await this.emptyCartMessage.isVisible();
-  }
-
-  async getTotalPrice(): Promise<string> {
-    return await this.totalPrice.textContent() || '';
   }
 
   async isProductInCart(productName: string): Promise<boolean> {
