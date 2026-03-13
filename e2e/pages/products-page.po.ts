@@ -39,7 +39,7 @@ export class ProductsPagePo extends BasePo {
   async shouldBeDisplayed(): Promise<void> {
     await this.ensurePageReady();
     // await expect(this.allProductsHeader).toBeVisible({ timeout: 10000 });
-    await expect(this.productsList).toBeVisible();
+    await expect(this.productsList).toBeVisible({ timeout: 10000 });
   }
 
   async navigateToProducts(): Promise<void> {

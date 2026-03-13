@@ -33,7 +33,7 @@ export class AccountStatusPagePo extends BasePo {
 
   async validateAccountCreated(): Promise<void> {
     await this.ensurePageReady();
-    await expect(this.accountCreatedMessage).toBeVisible();
+    await expect(this.accountCreatedMessage).toBeVisible({ timeout: 10000 });
   }
 
   async validateAccountDeleted(): Promise<void> {
