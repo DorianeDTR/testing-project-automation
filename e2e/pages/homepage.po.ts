@@ -26,7 +26,7 @@ export class HomepagePo extends BasePo {
     await this.navigateWithConsent('https://automationexercise.com/');
   }
   
-  async shouldBeDisplayed() {
+  async shouldBeDisplayed(): Promise<void> {
     await this.ensurePageReady();
     await expect(this.homepageContainer).toBeVisible();
   }

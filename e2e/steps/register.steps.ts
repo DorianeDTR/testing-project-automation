@@ -30,23 +30,12 @@ When('I fill account details with exhaustive information', async ({ signupPagePo
     await signupPagePo.selectTitle(user.title);
   }
   await signupPagePo.fillAccountInfoForm(user);
-  // await signupPagePo.selectNewsletterCheckbox();
-  // await signupPagePo.selectOptinCheckbox();
 });
-
-// When('I select checkbox \'Sign up for our newsletter!\'', async ({ signupPagePo }: AllFixtures) => {
-// });
-
-// When('I select checkbox \'Receive special offers from our partners!\'', async ({ signupPagePo }: AllFixtures) => {
-// });
 
 Then('account creation confirmation is displayed', async ({ accountStatusPagePo }: AllFixtures) => {
   await accountStatusPagePo.validateAccountCreated();
   await accountStatusPagePo.clickContinue();
 });
-
-// When('I click \'Continue\' button', async ({ accountCreatedPagePo }: AllFixtures) => {
-// });
 
 When('I log in', async ({ headerPagePo }: AllFixtures) => {
   await headerPagePo.shouldBeDisplayed();

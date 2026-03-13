@@ -24,11 +24,11 @@ export class LoginPagePo extends BasePo {
   }
   
   // Actions
-  async goTo() {
+  async goTo(): Promise<void> {
     await this.navigateWithConsent('https://automationexercise.com/login');
   }
 
-  async shouldBeDisplayed() {
+  async shouldBeDisplayed(): Promise<void> {
     await this.ensurePageReady();
     await expect(this.pageLocator).toBeVisible();
   }

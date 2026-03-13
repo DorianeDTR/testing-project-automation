@@ -90,7 +90,7 @@ export class SignupPagePo extends BasePo {
     await this.navigateWithConsent('https://automationexercise.com/login');
   }
 
-  async shouldBeDisplayed() {
+  async shouldBeDisplayed(): Promise<void> {
     await this.ensurePageReady();
     await expect(this.signupContainer).toBeVisible();
   }
@@ -102,7 +102,7 @@ export class SignupPagePo extends BasePo {
 
   async verifyAccountInfoTitle(): Promise<void> {
     await this.ensurePageReady();
-    const accountInfoTitle = this.page.locator('b:has-text("Enter Account Information")');
+    const accountInfoTitle = this.page.locator('b').filter({ hasText: 'Enter Account Information' });
     await expect(accountInfoTitle).toBeVisible();
   }
 
