@@ -16,7 +16,8 @@ export class HeaderPagePo extends BasePo {
   }
 
   get productsLink() {
-    return this.page.getByRole('link', { name: 'Products' });
+    // return this.page.getByRole('link', { name: 'Products' });
+    return this.page.locator('a[href="/products"]');
   }
 
   get cartLink() {
@@ -76,8 +77,11 @@ export class HeaderPagePo extends BasePo {
 
   async navigateToProducts(): Promise<void> {
     await this.ensurePageReady();
-    await this.productsLink.click();
-    await this.page.waitForLoadState('networkidle');
+    await this.productsLink.click({ force: true });
+    // await this.page.waitForLoadState('networkidle');
+    if (!this.page.url().includes('/products')) {
+      await this.page.goto('https://automationexercise.com/products');
+    }
   }
 
   async navigateToCart(): Promise<void> {

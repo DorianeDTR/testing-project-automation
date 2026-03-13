@@ -3,10 +3,10 @@ import { pageFixtures as test } from "../../../e2e/support/fixtures.ts";
 
 test.describe('Add Products in Cart', () => {
 
-  test('Add two different products to cart', { tag: ['@Automated'] }, async ({ Given, When, Then, And, accountStatusPagePo, cartPagePo, checkoutPagePo, headerPagePo, homepagePo, loginPagePo, page, productsPagePo, signupPagePo }) => { 
+  test('Add two different products to cart', { tag: ['@Automated'] }, async ({ Given, When, Then, And, accountStatusPagePo, cartPagePo, checkoutPagePo, headerPagePo, homepagePo, loginPagePo, productsPagePo, signupPagePo }) => { 
     await Given('I am on homepage', null, { homepagePo }); 
     await And('the home page is visible successfully', null, { homepagePo, loginPagePo }); 
-    await When('I click on \'Products\' button', null, { page }); 
+    await When('I click on \'Products\' button', null, { headerPagePo }); 
     await Then('I am navigated to ALL PRODUCTS page successfully', null, { productsPagePo }); 
     await And('the products list is visible', null, { productsPagePo }); 
     await When('I hover over "first" product', null, { productsPagePo }); 
