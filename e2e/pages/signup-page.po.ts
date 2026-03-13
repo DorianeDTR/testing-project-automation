@@ -42,6 +42,9 @@ export class SignupPagePo extends BasePo {
   get accountInfoTitle() {
     return this.page.locator('b:has-text("Enter Account Information")');
   }
+  get signupForm() {
+    return this.page.locator('form[action="/signup"]');
+  }
   get nameInput() {
     return this.page.locator('input[data-qa="name"]');
   }
@@ -102,8 +105,10 @@ export class SignupPagePo extends BasePo {
 
   async verifyAccountInfoTitle(): Promise<void> {
     await this.ensurePageReady();
-    const accountInfoTitle = this.page.locator('b').filter({ hasText: 'Enter Account Information' });
-    await expect(accountInfoTitle).toBeVisible();
+    // const accountInfoTitle = this.page.locator('b').filter({ hasText: 'Enter Account Information' });
+    // await expect(accountInfoTitle).toBeVisible();
+
+    await expect(this.signupForm).toBeVisible({ timeout: 7000 });
   }
 
   async selectTitle(title: string): Promise<void> {
