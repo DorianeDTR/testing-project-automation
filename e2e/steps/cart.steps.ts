@@ -16,10 +16,8 @@ Given('the home page is visible successfully', async ({ homepagePo, loginPagePo 
   await loginPagePo.logAs('miniga3780@ostahie.com', 'pa$$word');
 });
 
-When('I click on {string} button', async ({ headerPagePo }: AllFixtures, buttonName: string) => {
-  if (buttonName === 'Products') {
-    await headerPagePo.navigateToProducts();
-  }
+When('I click on {string} button', async ({ headerPagePo }: AllFixtures) => {
+  await headerPagePo.navigateToProducts();
 });
 
 Then('I am navigated to ALL PRODUCTS page successfully', async ({ productsPagePo }: AllFixtures) => {

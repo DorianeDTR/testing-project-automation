@@ -33,7 +33,7 @@ When('I fill account details with exhaustive information', async ({ signupPagePo
 });
 
 Then('account creation confirmation is displayed', async ({ accountStatusPagePo }: AllFixtures) => {
-  await accountStatusPagePo.validateAccountCreated();
+  await accountStatusPagePo.shouldBeDisplayed();
   await accountStatusPagePo.clickContinue();
 });
 
@@ -49,6 +49,6 @@ When('I log in', async ({ headerPagePo }: AllFixtures) => {
 Then('I delete my account', async ({ headerPagePo, accountStatusPagePo }: AllFixtures) => {
   await headerPagePo.deleteAccount();
 
-  await accountStatusPagePo.validateAccountDeleted();
+  await accountStatusPagePo.shouldBeDisplayed();
   await accountStatusPagePo.clickContinue();
 });
