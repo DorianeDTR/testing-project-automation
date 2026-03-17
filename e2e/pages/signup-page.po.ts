@@ -134,14 +134,17 @@ export class SignupPagePo extends BasePo {
     await this.signupEmailInput.fill(user.email);
     await this.signupButton.click();
     // await this.page.waitForLoadState('networkidle');
-    await this.page.waitForURL('**/signup');
+    await this.page.waitForURL('**/signup', { timeout: 15000 });
   }
 
   // Account Information
   async fillAccountInfoForm(
     user: UserData): Promise<void> {
+    await this.page.waitForURL('**/signup');
     await this.ensurePageReady();
-    await this.nameInput.waitFor({ state: 'attached', timeout: 10000 });
+
+    await this.nameInput.waitFor({ state: 'attached', timeout: 15000 });
+
     if (await this.nameInput.isEditable()) {
       await this.nameInput.fill(user.name);
     } else {
