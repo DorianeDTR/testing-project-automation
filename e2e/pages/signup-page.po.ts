@@ -150,11 +150,11 @@ export class SignupPagePo extends BasePo {
     // } else {
     //   console.log('ℹ️ Name field is disabled (pre-filled), skipping fill action.');
     // }
-    if (await this.emailInput.isEditable()) {
-      await this.emailInput.fill(user.email);
-    } else {
-      console.log('ℹ️ Email field is disabled (pre-filled), skipping fill action.');
-    }
+    // if (await this.emailInput.isEditable()) {
+    //   await this.emailInput.fill(user.email);
+    // } else {
+    //   console.log('ℹ️ Email field is disabled (pre-filled), skipping fill action.');
+    // }
     await this.passwordInput.fill(user.password);
     await this.firstNameInput.fill(user.firstName);
     await this.lastNameInput.fill(user.lastName);
