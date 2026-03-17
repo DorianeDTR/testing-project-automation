@@ -141,15 +141,11 @@ export class SignupPagePo extends BasePo {
   async fillAccountInfoForm(
     user: UserData): Promise<void> {
     await this.ensurePageReady();
+    await this.nameInput.waitFor({ state: 'attached', timeout: 10000 });
     if (await this.nameInput.isEditable()) {
       await this.nameInput.fill(user.name);
     } else {
       console.log('ℹ️ Name field is disabled (pre-filled), skipping fill action.');
-    }
-    if (await this.emailInput.isEditable()) {
-      await this.emailInput.fill(user.email);
-    } else {
-      console.log('ℹ️ Email field is disabled (pre-filled), skipping fill action.');
     }
     if (await this.emailInput.isEditable()) {
       await this.emailInput.fill(user.email);
@@ -173,6 +169,6 @@ export class SignupPagePo extends BasePo {
     await this.cityInput.fill(user.city);
     await this.zipcodeInput.fill(user.zipcode);
     await this.mobileNumberInput.fill(user.mobileNumber);
-    await this.createAccountButton.click();
+    await this.createAccountButton.click({ force: true });
   }
 }

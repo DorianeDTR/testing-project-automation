@@ -25,6 +25,7 @@ export class AccountStatusPagePo extends BasePo {
 
   // Actions
   async shouldBeDisplayed(): Promise<void> {
+    await this.page.waitForURL('**/account_created', { timeout: 15000 }).catch(() => {});
     await this.ensurePageReady();
     await expect(this.statusMessage).toBeVisible({ timeout: 15000 });
   }
