@@ -1,6 +1,8 @@
 import { Page, expect } from "@playwright/test";
 import { createBdd } from "playwright-bdd";
 import { AllFixtures, pageFixtures } from "../support/fixtures";
+import users from "../users.json" with { type: 'json' };
+
 
 export const fixtures = pageFixtures;
 const {Given, When, Then} = createBdd(fixtures);
@@ -11,9 +13,11 @@ Given('I am on homepage', async ({ homepagePo }: AllFixtures) => {
 
 Given('the home page is visible successfully', async ({ homepagePo, loginPagePo }: AllFixtures) => {
   await homepagePo.shouldBeDisplayed();
+  
   await loginPagePo.goTo();
   await loginPagePo.shouldBeDisplayed();
-  await loginPagePo.logAs('miniga3780@ostahie.com', 'pa$$word');
+  const user = users.john;
+  await loginPagePo.logAs(user.email, user.password);
 });
 
 When('I click on {string} button', async ({ headerPagePo }: AllFixtures) => {
@@ -84,39 +88,49 @@ Then('their total price is calculated correctly', async ({ cartPagePo, checkoutP
   await cartPagePo.proceedToCheckout();
   
   await checkoutPagePo.handleCheckoutModal();
+
   await signupPagePo.shouldBeDisplayed();
+  const user = users.john;
 
-  const userData = {
-    name: 'JohnDoe',
-    email: 'miniga3780@ostahie.com',
-    password: 'pa$$word',
-    title: 'Mr',
-    firstName: 'John',
-    lastName: 'Doe',
-    company: '',
-    address: 'Here and there',
-    address2: '',
-    country: 'Canada',
-    state: 'Gironde',
-    city: 'Bordeaux',
-    zipcode: '33000',
-    mobileNumber: '0123456789'
-  };
-
-  await signupPagePo.fillNewUserForm(userData);
-  await signupPagePo.fillAccountInfoForm(userData);
-
-  await accountStatusPagePo.validateAccountCreated();
-  await accountStatusPagePo.clickContinue();
-  await homepagePo.shouldBeDisplayed();
-  await headerPagePo.navigateToCart();
-
-  await cartPagePo.shouldBeDisplayed();
-  await cartPagePo.proceedToCheckout();
+  // Check if we need to signup/login or if we're already on checkout page
+  // const currentUrl = await checkoutPagePo.getCurrentUrl();
+  // console.log('Current URL after modal handling:', currentUrl);
   
-  await checkoutPagePo.shouldBeDisplayed();
-  
-  const totalPrice = await checkoutPagePo.getTotalPrice();
-  expect(totalPrice).toContain('Rs. 2500');
-});
+  // if (currentUrl.includes('/login')) {
+  //   // We need to signup/login
+  //   await signupPagePo.shouldBeDisplayed();
+
+  //   const user = {
+  //     title: 'Mr',
+  //     name: 'JohnDoe',
+  //     email: 'miniga3780@ostahie.com',
+  //     password: 'pa$$word',
+  //     firstName: 'John',
+  //     lastName: 'Doe',
+  //     company: '',
+  //     address: 'Here and there',
+  //     address2: '',
+  //     country: 'Canada',
+  //     state: 'Gironde',
+  //     city: 'Bordeaux',
+  //     zipcode: '33000',
+  //     mobileNumber: '0123456789'
+  //   };
+
+    await signupPagePo.fillNewUserForm(user);
+    await signupPagePo.fillAccountInfoForm(user);
+
+    await accountStatusPagePo.validateAccountCreated();
+    await accountStatusPagePo.clickContinue();
+    await homepagePo.shouldBeDisplayed();
+    await headerPagePo.navigateToCart();
+
+    await cartPagePo.shouldBeDisplayed();
+    await cartPagePo.proceedToCheckout();
+    await checkoutPagePo.shouldBeDisplayed();
+    
+    const totalPrice = await checkoutPagePo.getTotalPrice();
+    expect(totalPrice).toContain('Rs. 2500');
+  }
+);
 

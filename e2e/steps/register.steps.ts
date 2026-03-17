@@ -29,6 +29,9 @@ When('I fill account details with exhaustive information', async ({ signupPagePo
   if (user.title) {
     await signupPagePo.selectTitle(user.title);
   }
+  
+  // await signupPagePo.selectNewsletterCheckbox();
+  // await signupPagePo.selectOptinCheckbox();
   await signupPagePo.fillAccountInfoForm(user);
 });
 
@@ -43,7 +46,7 @@ When('I log in', async ({ headerPagePo }: AllFixtures) => {
   
   const displayUserName = await headerPagePo.getLoggedInUserName();
   console.log('Logged in as:', displayUserName);
-  expect(displayUserName).toContain(users.john.name);
+  expect(displayUserName).toContain('JohnDoe');
 });
 
 Then('I delete my account', async ({ headerPagePo, accountStatusPagePo }: AllFixtures) => {

@@ -93,7 +93,7 @@ export class HeaderPagePo extends BasePo {
   async navigateToSignupLogin(): Promise<void> {
     await this.ensurePageReady();
     await this.signupLoginLink.click();
-    await this.page.waitForLoadState('networkidle');
+    // await this.page.waitForLoadState('networkidle');
   }
 
   async navigateToTestCases(): Promise<void> {

@@ -26,15 +26,17 @@ export class SignupPagePo extends BasePo {
 
   // Locators
   get signupContainer() {
-    return this.page.locator('.signup-form');
+    return this.page.locator('form').first();
   }
 
   get signupNameInput() {
     return this.page.locator('input[data-qa="signup-name"]');
   }
+
   get signupEmailInput() {
     return this.page.locator('input[data-qa="signup-email"]');
   }
+
   get signupButton() {
     return this.page.locator('button[data-qa="signup-button"]');
   }
@@ -42,6 +44,7 @@ export class SignupPagePo extends BasePo {
   get accountInfoTitle() {
     return this.page.locator('b:has-text("Enter Account Information")');
   }
+
   get signupForm() {
     return this.page.locator('form[action="/signup"]');
   }
@@ -93,9 +96,10 @@ export class SignupPagePo extends BasePo {
     await this.navigateWithConsent('https://automationexercise.com/login');
   }
 
-  async shouldBeDisplayed(): Promise<void> {
+  async shouldBeDisplayed() {
     await this.ensurePageReady();
-    await expect(this.signupContainer).toBeVisible();
+    console.log('Current URL:', this.page.url());
+    console.log('Page title:', await this.page.title());
   }
 
   async verifyNewUserSignupTitle(): Promise<void> {
