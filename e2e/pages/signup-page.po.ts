@@ -143,13 +143,13 @@ export class SignupPagePo extends BasePo {
     await this.page.waitForURL('**/signup');
     await this.ensurePageReady();
 
-    await this.nameInput.waitFor({ state: 'attached', timeout: 15000 });
+    // await this.nameInput.waitFor({ state: 'attached', timeout: 15000 });
 
-    if (await this.nameInput.isEditable()) {
-      await this.nameInput.fill(user.name);
-    } else {
-      console.log('ℹ️ Name field is disabled (pre-filled), skipping fill action.');
-    }
+    // if (await this.nameInput.isEditable()) {
+    //   await this.nameInput.fill(user.name);
+    // } else {
+    //   console.log('ℹ️ Name field is disabled (pre-filled), skipping fill action.');
+    // }
     if (await this.emailInput.isEditable()) {
       await this.emailInput.fill(user.email);
     } else {
