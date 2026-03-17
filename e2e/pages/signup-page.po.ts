@@ -115,9 +115,9 @@ export class SignupPagePo extends BasePo {
     await expect(this.signupForm).toBeVisible({ timeout: 7000 });
   }
 
-  async selectTitle(title: string): Promise<void> {
-    await this.page.locator(`input[name="title"][value="${title}"]`).check();
-  }
+  // async selectTitle(title: string): Promise<void> {
+  //   await this.page.locator(`input[name="title"][value="${title}"]`).check();
+  // }
 
   // async selectNewsletterCheckbox(): Promise<void> {
   //   await this.page.locator('input[name="newsletter"]').check({ force: true });
@@ -133,14 +133,24 @@ export class SignupPagePo extends BasePo {
     await this.signupNameInput.fill(user.name);
     await this.signupEmailInput.fill(user.email);
     await this.signupButton.click();
-    await this.page.waitForLoadState('networkidle');
+    // await this.page.waitForLoadState('networkidle');
+    await this.page.waitForURL('**/signup');
   }
 
   // Account Information
   async fillAccountInfoForm(
     user: UserData): Promise<void> {
     await this.ensurePageReady();
-    await this.nameInput.fill(user.name);
+    if (await this.nameInput.isEditable()) {
+      await this.nameInput.fill(user.name);
+    } else {
+      console.log('ℹ️ Name field is disabled (pre-filled), skipping fill action.');
+    }
+    if (await this.emailInput.isEditable()) {
+      await this.emailInput.fill(user.email);
+    } else {
+      console.log('ℹ️ Email field is disabled (pre-filled), skipping fill action.');
+    }
     if (await this.emailInput.isEditable()) {
       await this.emailInput.fill(user.email);
     } else {

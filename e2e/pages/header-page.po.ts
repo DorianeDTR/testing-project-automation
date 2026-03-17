@@ -87,7 +87,8 @@ export class HeaderPagePo extends BasePo {
   async navigateToCart(): Promise<void> {
     await this.ensurePageReady();
     await this.cartLink.click();
-    await this.page.waitForLoadState('networkidle');
+    // await this.page.waitForLoadState('networkidle');
+    await this.page.waitForURL('**/view_cart');
   }
 
   async navigateToSignupLogin(): Promise<void> {

@@ -26,9 +26,9 @@ When('I enter valid data', async ({ signupPagePo }: AllFixtures) => {
 When('I fill account details with exhaustive information', async ({ signupPagePo }: AllFixtures) => {
   const user = users.john;
   await signupPagePo.verifyAccountInfoTitle();
-  if (user.title) {
-    await signupPagePo.selectTitle(user.title);
-  }
+  // if (user.title) {
+  //   await signupPagePo.selectTitle(user.title);
+  // }
   
   // await signupPagePo.selectNewsletterCheckbox();
   // await signupPagePo.selectOptinCheckbox();

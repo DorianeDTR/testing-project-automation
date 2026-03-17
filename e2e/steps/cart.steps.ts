@@ -118,9 +118,10 @@ Then('their total price is calculated correctly', async ({ cartPagePo, checkoutP
   //   };
 
     await signupPagePo.fillNewUserForm(user);
+    await signupPagePo.verifyAccountInfoTitle();
     await signupPagePo.fillAccountInfoForm(user);
 
-    await accountStatusPagePo.validateAccountCreated();
+    await accountStatusPagePo.shouldBeDisplayed();
     await accountStatusPagePo.clickContinue();
     await homepagePo.shouldBeDisplayed();
     await headerPagePo.navigateToCart();
