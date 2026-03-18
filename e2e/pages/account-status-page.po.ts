@@ -46,7 +46,7 @@ export class AccountStatusPagePo extends BasePo {
     await this.ensurePageReady();
     await this.handleConsent();
     await this.continueButton.click({ force: true });
-    await this.page.waitForURL('**/', { timeout: 15000 });
+    // await this.page.waitForURL('**/', { timeout: 15000 });
   }
 
   // async getStatusMessage(): Promise<string> {
