@@ -140,21 +140,21 @@ export class SignupPagePo extends BasePo {
   // Account Information
   async fillAccountInfoForm(
     user: UserData): Promise<void> {
-    await this.page.waitForURL('**/signup');
+    await this.page.waitForURL('**/signup', { timeout: 15000 });
     await this.ensurePageReady();
 
-    // await this.nameInput.waitFor({ state: 'attached', timeout: 15000 });
+    await this.nameInput.waitFor({ state: 'attached', timeout: 15000 });
 
-    // if (await this.nameInput.isEditable()) {
-    //   await this.nameInput.fill(user.name);
-    // } else {
-    //   console.log('ℹ️ Name field is disabled (pre-filled), skipping fill action.');
-    // }
-    // if (await this.emailInput.isEditable()) {
-    //   await this.emailInput.fill(user.email);
-    // } else {
-    //   console.log('ℹ️ Email field is disabled (pre-filled), skipping fill action.');
-    // }
+    if (await this.nameInput.isEditable()) {
+      await this.nameInput.fill(user.name);
+    } else {
+      console.log('ℹ️ Name field is disabled (pre-filled), skipping fill action.');
+    }
+    if (await this.emailInput.isEditable()) {
+      await this.emailInput.fill(user.email);
+    } else {
+      console.log('ℹ️ Email field is disabled (pre-filled), skipping fill action.');
+    }
     await this.passwordInput.fill(user.password);
     await this.firstNameInput.fill(user.firstName);
     await this.lastNameInput.fill(user.lastName);

@@ -164,8 +164,7 @@ export class CartPagePo extends BasePo {
     
     await this.proceedToCheckoutButton.click({ force: true });
     console.log('✅ Clicked Proceed to Checkout');
-    await this.page.waitForLoadState('networkidle');
-    console.log('After proceed to checkout - Current URL:', this.page.url());
+    // await this.page.waitForLoadState('networkidle');
   }
 
   async continueShopping(): Promise<void> {

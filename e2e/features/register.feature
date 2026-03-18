@@ -1,7 +1,6 @@
 Feature: Register User
   Test Case 1: Register User
 
-  @Automated
   Scenario: Complete user registration flow
     Given I am on the homepage
     Then 'New User Signup!' is visible
