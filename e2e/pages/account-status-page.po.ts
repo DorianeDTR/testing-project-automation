@@ -49,7 +49,7 @@ export class AccountStatusPagePo extends BasePo {
     await this.continueButton.click({ force: true });
 
     // await this.page.waitForLoadState('networkidle');
-    await this.continueButton.waitFor({ state: 'hidden', timeout: 10000 });
+    await this.page.waitForURL('**/', { timeout: 15000 });
   }
 
   // async getStatusMessage(): Promise<string> {
