@@ -96,9 +96,10 @@ export class CheckoutPagePo extends BasePo {
     
     if (await checkoutModal.isVisible({ timeout: 2000 })) {
       console.log('Checkout modal is visible, clicking Register / Login link...');
-      await this.modalRegisterLink.click();
+      await this.modalRegisterLink.click({ force: true });
       console.log('✅ Checkout modal handled - clicked Register / Login');
-      await this.page.waitForLoadState('networkidle');
+      // await this.page.waitForLoadState('networkidle');
+      await this.page.waitForURL('**/login', { timeout: 15000 });
       console.log('After navigation - Current URL:', this.page.url());
     } else {
       console.log('Checkout modal is not visible, proceeding without modal handling');
