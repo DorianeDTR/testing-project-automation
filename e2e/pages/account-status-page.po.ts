@@ -31,6 +31,9 @@ export class AccountStatusPagePo extends BasePo {
   }
 
   async validateAccountCreated(): Promise<void> {
+    if (!this.page.url().includes('account_created')) {
+        await this.page.goto('https://automationexercise.com/account_created');
+    }
     await this.ensurePageReady();
     await expect(this.accountCreatedMessage).toBeVisible({ timeout: 10000 });
   }
