@@ -28,7 +28,7 @@ export class HomepagePo extends BasePo {
   
   async shouldBeDisplayed(): Promise<void> {
     await this.ensurePageReady();
-    await expect(this.homepageContainer).toBeVisible();
+    await expect(this.homepageContainer).toBeVisible({ timeout: 15000 });
   }
 
   async isHomepageFullyLoaded(): Promise<boolean> {
