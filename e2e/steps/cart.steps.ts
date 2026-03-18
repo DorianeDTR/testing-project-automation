@@ -35,10 +35,8 @@ Then('the products list is visible', async ({ productsPagePo }: AllFixtures) => 
 
 When('I hover over {string} product', async ({ productsPagePo }: AllFixtures, productOrder: string) => {
   if (productOrder === 'first') {
-    // await productsPagePo.addFirstProductToCart();
     console.log(`Hovering over ${productOrder} product...`);
   } else if (productOrder === 'second') {
-    // await productsPagePo.addSecondProductToCart();
     console.log(`Hovering over ${productOrder} product...`);
   }
 });
@@ -91,31 +89,6 @@ Then('their total price is calculated correctly', async ({ cartPagePo, checkoutP
 
   await signupPagePo.shouldBeDisplayed();
   const user = users.john;
-
-  // Check if we need to signup/login or if we're already on checkout page
-  // const currentUrl = await checkoutPagePo.getCurrentUrl();
-  // console.log('Current URL after modal handling:', currentUrl);
-  
-  // if (currentUrl.includes('/login')) {
-  //   // We need to signup/login
-  //   await signupPagePo.shouldBeDisplayed();
-
-  //   const user = {
-  //     title: 'Mr',
-  //     name: 'JohnDoe',
-  //     email: 'miniga3780@ostahie.com',
-  //     password: 'pa$$word',
-  //     firstName: 'John',
-  //     lastName: 'Doe',
-  //     company: '',
-  //     address: 'Here and there',
-  //     address2: '',
-  //     country: 'Canada',
-  //     state: 'Gironde',
-  //     city: 'Bordeaux',
-  //     zipcode: '33000',
-  //     mobileNumber: '0123456789'
-  //   };
 
     await signupPagePo.fillNewUserForm(user);
     await signupPagePo.verifyAccountInfoTitle();

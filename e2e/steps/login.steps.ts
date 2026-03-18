@@ -17,7 +17,7 @@ When('I go to the login page', async ({ loginPagePo }: AllFixtures) => {
 });
 
 Then('I fill the login form with valid data', async ({ loginPagePo }: AllFixtures) => {
-  const user = users.john;
+  const user = users.david;
   await loginPagePo.logAs(user.email, user.password);
 });
 
