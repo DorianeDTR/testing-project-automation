@@ -27,7 +27,6 @@ export class AccountStatusPagePo extends BasePo {
   async shouldBeDisplayed(): Promise<void> {
     await this.page.waitForURL('**/account_created', { timeout: 15000 }).catch(() => {});
     await this.ensurePageReady();
-    // await expect(this.statusMessage).toBeVisible({ timeout: 15000 });
   }
 
   async validateAccountCreated(): Promise<void> {
@@ -47,8 +46,6 @@ export class AccountStatusPagePo extends BasePo {
     await this.ensurePageReady();
     await this.handleConsent();
     await this.continueButton.click({ force: true });
-
-    // await this.page.waitForLoadState('networkidle');
     await this.page.waitForURL('**/', { timeout: 15000 });
   }
 
