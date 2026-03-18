@@ -47,6 +47,12 @@ export class AccountStatusPagePo extends BasePo {
     await this.handleConsent();
     await this.continueButton.click({ force: true });
     // await this.page.waitForURL('**/', { timeout: 15000 });
+    try {
+        await this.page.waitForURL('**/', { timeout: 7000 });
+    } catch (e) {
+        console.log('⚠️ Navigation bloquée (Vignette Google), force-refresh vers la home...');
+        await this.page.goto('https://automationexercise.com/');
+    }
   }
 
   // async getStatusMessage(): Promise<string> {
