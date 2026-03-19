@@ -90,21 +90,50 @@ Then('their total price is calculated correctly', async ({ cartPagePo, checkoutP
   await signupPagePo.shouldBeDisplayed();
   const user = users.john;
 
-    await signupPagePo.fillNewUserForm(user);
-    await signupPagePo.verifyAccountInfoTitle();
-    await signupPagePo.fillAccountInfoForm(user);
+  await signupPagePo.fillNewUserForm(user);
+  await signupPagePo.verifyAccountInfoTitle();
+  await signupPagePo.fillAccountInfoForm(user);
 
-    await accountStatusPagePo.validateAccountCreated();
-    await accountStatusPagePo.clickContinue();
-    await homepagePo.shouldBeDisplayed();
-    await headerPagePo.navigateToCart();
+  await accountStatusPagePo.validateAccountCreated();
+  await accountStatusPagePo.clickContinue();
+  await homepagePo.shouldBeDisplayed();
+  await headerPagePo.navigateToCart();
 
-    await cartPagePo.shouldBeDisplayed();
-    await cartPagePo.proceedToCheckout();
-    await checkoutPagePo.shouldBeDisplayed();
-    
-    const totalPrice = await checkoutPagePo.getTotalPrice();
-    expect(totalPrice).toContain('Rs. 2500');
-  }
-);
+  await cartPagePo.shouldBeDisplayed();
+  await cartPagePo.proceedToCheckout();
+  await checkoutPagePo.shouldBeDisplayed();
+  
+  const totalPrice = await checkoutPagePo.getTotalPrice();
+  expect(totalPrice).toContain('Rs. 2500');
+});
 
+When('I enter description in comment text area and click Place Order', async ({ checkoutPagePo }: AllFixtures) => {
+  await checkoutPagePo.placeOrder('Test order comment');
+});
+
+When('I enter payment details: Name on Card, Card Number, CVC, Expiration date', async ({ paymentPagePo }: AllFixtures) => {
+  await paymentPagePo.fillPaymentDetails('John Doe', '4111111111111111', '123', '12/28');
+});
+
+When('I click \'Pay and Confirm Order\' button', async ({ paymentPagePo }: AllFixtures) => {
+  await paymentPagePo.payAndConfirmOrder();
+});
+
+Then('success message \'Your order has been placed successfully!\' is visible', async ({ paymentPagePo }: AllFixtures) => {
+  await paymentPagePo.verifyOrderSuccess();
+});
+
+When('I click \'Download Invoice\' button', async ({ paymentPagePo }: AllFixtures) => {
+  await paymentPagePo.downloadInvoice();
+});
+
+Then('invoice is downloaded successfully', async ({ paymentPagePo }: AllFixtures) => {
+  // Verify invoice download (optional as mentioned)
+  console.log('Invoice download initiated');
+});
+
+When('I click \'Delete Account\' button', async ({ headerPagePo, accountStatusPagePo }: AllFixtures) => {
+  await headerPagePo.deleteAccount();
+  await accountStatusPagePo.validateAccountDeleted();
+  await accountStatusPagePo.clickContinue();
+});

@@ -68,15 +68,11 @@ export class CheckoutPagePo extends BasePo {
   }
 
   get cardExpiryInput() {
-    return this.page.locator('input[data-qa="expiry-month"]');
+    return this.page.locator('input[data-qa="expiry"]');
   }
 
-  get orderSuccessMessage() {
-    return this.page.getByText('Order Placed!');
-  }
-
-  get orderConfirmationNumber() {
-    return this.page.locator('.order-number');
+  get commentTextArea() {
+    return this.page.locator('textarea[name="message"]');
   }
 
   // Actions
@@ -119,8 +115,11 @@ export class CheckoutPagePo extends BasePo {
     await this.proceedToPaymentButton.click();
   }
 
-  async placeOrder(): Promise<void> {
+  async placeOrder(comment?: string): Promise<void> {
     await this.ensurePageReady();
+    if (comment) {
+      await this.commentTextArea.fill(comment);
+    }
     await this.placeOrderButton.click();
   }
 
@@ -181,12 +180,7 @@ export class CheckoutPagePo extends BasePo {
 
   async isOrderSuccessful(): Promise<boolean> {
     await this.ensurePageReady();
-    return await this.orderSuccessMessage.isVisible();
-  }
-
-  async getOrderConfirmationNumber(): Promise<string> {
-    await this.ensurePageReady();
-    const text = await this.orderConfirmationNumber.textContent();
-    return text?.trim() || '';
+    // This method should be called on payment page, not checkout page
+    return false;
   }
 }
