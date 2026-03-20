@@ -52,26 +52,6 @@ export class CheckoutPagePo extends BasePo {
     return this.page.getByRole('link', { name: 'Place Order' });
   }
 
-  get paymentSection() {
-    return this.page.locator('#payment_section');
-  }
-
-  get nameOnCardInput() {
-    return this.page.locator('input[data-qa="name-on-card"]');
-  }
-
-  get cardNumberInput() {
-    return this.page.locator('input[data-qa="card-number"]');
-  }
-
-  get cardCvcInput() {
-    return this.page.locator('input[data-qa="cvc"]');
-  }
-
-  get cardExpiryInput() {
-    return this.page.locator('input[data-qa="expiry"]');
-  }
-
   get commentTextArea() {
     return this.page.locator('textarea[name="message"]');
   }
@@ -122,14 +102,6 @@ export class CheckoutPagePo extends BasePo {
       await this.commentTextArea.fill(comment);
     }
     await this.placeOrderButton.click();
-  }
-
-  async fillPaymentDetails(name: string, cardNumber: string, cvc: string, expiry: string): Promise<void> {
-    await this.ensurePageReady();
-    await this.nameOnCardInput.fill(name);
-    await this.cardNumberInput.fill(cardNumber);
-    await this.cardCvcInput.fill(cvc);
-    await this.cardExpiryInput.fill(expiry);
   }
 
   async getTotalPrice(): Promise<string> {

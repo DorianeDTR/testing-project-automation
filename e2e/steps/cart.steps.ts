@@ -107,7 +107,14 @@ When('I enter description in comment text area and click \'Place Order\'', async
 });
 
 Then('I enter payment details', async ({ paymentPagePo }: AllFixtures) => {
-  await paymentPagePo.proceedPayment('John Doe', '4111111111111111', '123', '12', '2028');
+  const user = users.john;
+  await paymentPagePo.proceedPayment(
+    user.payment.cardName, 
+    user.payment.cardNumber, 
+    user.payment.cvc, 
+    user.payment.expiryMonth, 
+    user.payment.expiryYear
+  );
 });
 
 // Then('success message \'Your order has been placed successfully!\' is visible', async ({ paymentPagePo }: AllFixtures) => {
