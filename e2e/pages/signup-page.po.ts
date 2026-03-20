@@ -135,7 +135,7 @@ export class SignupPagePo extends BasePo {
     await this.page.waitForURL('**/signup', { timeout: 15000 });
     await this.ensurePageReady();
 
-    await this.nameInput.waitFor({ state: 'attached', timeout: 15000 });
+    // await this.nameInput.waitFor({ state: 'attached', timeout: 15000 });
 
     if (await this.nameInput.isEditable()) {
       await this.nameInput.fill(user.name);

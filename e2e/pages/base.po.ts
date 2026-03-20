@@ -58,7 +58,7 @@ export abstract class BasePo {
 
   protected async ensurePageReady(): Promise<void> {
     await this.handleConsent();
-    await this.page.waitForTimeout(500);
+    // await this.page.waitForTimeout(500);
   }
 
   protected async navigateWithConsent(url: string): Promise<void> {

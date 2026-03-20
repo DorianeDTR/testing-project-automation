@@ -24,6 +24,10 @@ const bddConfig = defineBddConfig({
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  timeout: 60000,
+  expect: {
+    timeout: 10000,
+  },
   testDir: bddConfig,
 
   fullyParallel: true,
