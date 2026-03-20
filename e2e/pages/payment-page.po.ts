@@ -88,3 +88,4 @@ export class PaymentPagePo extends BasePo {
     console.log('Downloaded invoice:', download.suggestedFilename());
   }
 }
+
