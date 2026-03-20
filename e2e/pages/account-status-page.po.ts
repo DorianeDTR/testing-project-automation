@@ -7,9 +7,6 @@ export class AccountStatusPagePo extends BasePo {
   }
 
   // Locators
-  // get statusMessage() {
-  //   return this.page.locator('h2[data-qa="account-created"], h2[data-qa="account-deleted"]');
-  // }
 
   get accountCreatedMessage() {
     return this.page.locator('[data-qa="account-created"]');
@@ -46,7 +43,6 @@ export class AccountStatusPagePo extends BasePo {
     await this.ensurePageReady();
     await this.handleConsent();
     await this.continueButton.click({ force: true });
-    // await this.page.waitForURL('**/', { timeout: 15000 });
     try {
         await this.page.waitForURL('**/', { timeout: 7000 });
     } catch (e) {
@@ -54,12 +50,6 @@ export class AccountStatusPagePo extends BasePo {
         await this.page.goto('https://automationexercise.com/');
     }
   }
-
-  // async getStatusMessage(): Promise<string> {
-  //   await this.ensurePageReady();
-  //   const text = await this.statusMessage.textContent();
-  //   return text?.trim() || '';
-  // }
 
   async isAccountCreated(): Promise<boolean> {
     await this.ensurePageReady();

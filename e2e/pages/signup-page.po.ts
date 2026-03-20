@@ -98,8 +98,6 @@ export class SignupPagePo extends BasePo {
 
   async shouldBeDisplayed() {
     await this.ensurePageReady();
-    console.log('Current URL:', this.page.url());
-    console.log('Page title:', await this.page.title());
   }
 
   async verifyNewUserSignupTitle(): Promise<void> {
@@ -109,9 +107,6 @@ export class SignupPagePo extends BasePo {
 
   async verifyAccountInfoTitle(): Promise<void> {
     await this.ensurePageReady();
-    // const accountInfoTitle = this.page.locator('b').filter({ hasText: 'Enter Account Information' });
-    // await expect(accountInfoTitle).toBeVisible();
-
     await expect(this.signupForm).toBeVisible({ timeout: 7000 });
   }
 
@@ -127,17 +122,14 @@ export class SignupPagePo extends BasePo {
   //   await this.page.locator('input[name="optin"]').check({ force: true });
   // }
 
-  // New User Signup 
   async fillNewUserForm(user: UserData): Promise<void> {
     await this.ensurePageReady();
     await this.signupNameInput.fill(user.name);
     await this.signupEmailInput.fill(user.email);
     await this.signupButton.click();
-    // await this.page.waitForLoadState('networkidle');
     await this.page.waitForURL('**/signup', { timeout: 15000 });
   }
 
-  // Account Information
   async fillAccountInfoForm(
     user: UserData): Promise<void> {
     await this.page.waitForURL('**/signup', { timeout: 15000 });
@@ -158,12 +150,10 @@ export class SignupPagePo extends BasePo {
     await this.passwordInput.fill(user.password);
     await this.firstNameInput.fill(user.firstName);
     await this.lastNameInput.fill(user.lastName);
-    // await this.companyInput.fill(user.company);
     if (user.company) {
       await this.companyInput.fill(user.company);
     }
     await this.addressInput.fill(user.address);
-    // await this.address2Input.fill(user.address2);
     if (user.address2) {
       await this.address2Input.fill(user.address2);
     }

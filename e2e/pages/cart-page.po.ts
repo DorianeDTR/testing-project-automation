@@ -20,7 +20,6 @@ export class CartPagePo extends BasePo {
   }
 
   get proceedToCheckoutButton() {
-    // return this.page.getByRole('link', { name: 'Proceed To Checkout' });
     return this.page.locator('a.check_out');
   }
 
@@ -91,7 +90,6 @@ export class CartPagePo extends BasePo {
   async clickViewCartInModal(): Promise<void> {
     await this.ensurePageReady();
     await this.modalViewCartButton.click({ force: true });
-    // await this.page.waitForLoadState('networkidle');
     await this.productRows.first().waitFor({ state: 'visible', timeout: 5000 });
   }
 
@@ -160,18 +158,12 @@ export class CartPagePo extends BasePo {
     await this.ensurePageReady();
     await this.handleConsent();
     
-    // await this.proceedToCheckoutButton.waitFor({ state: 'visible' });
-    
     await this.proceedToCheckoutButton.click({ force: true });
-    console.log('✅ Clicked Proceed to Checkout');
-    // await this.page.waitForURL('**/view_cart', { timeout: 15000 });
 
     await Promise.race([
         this.page.waitForURL('**/checkout', { timeout: 5000 }).catch(() => {}),
         this.page.locator('#checkoutModal').waitFor({ state: 'visible', timeout: 5000 }).catch(() => {})
     ]);
-
-    console.log('Current URL after click:', this.page.url());
   }
 
   async continueShopping(): Promise<void> {

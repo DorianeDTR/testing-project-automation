@@ -48,7 +48,6 @@ export class CheckoutPagePo extends BasePo {
   }
 
   get placeOrderButton() {
-    // return this.page.getByRole('button', { name: 'Place Order' });
     return this.page.getByRole('link', { name: 'Place Order' });
   }
 
@@ -69,15 +68,10 @@ export class CheckoutPagePo extends BasePo {
   async handleCheckoutModal(): Promise<void> {
     await this.ensurePageReady();
     const checkoutModal = this.checkoutModal;
-    console.log('Checking if checkout modal is visible...');
-    
+  
     if (await checkoutModal.isVisible({ timeout: 2000 })) {
-      console.log('Checkout modal is visible, clicking Register / Login link...');
       await this.modalRegisterLink.click({ force: true });
-      console.log('✅ Checkout modal handled - clicked Register / Login');
-      // await this.page.waitForLoadState('networkidle');
       await this.page.waitForURL('**/login', { timeout: 15000 });
-      console.log('After navigation - Current URL:', this.page.url());
     } else {
       console.log('Checkout modal is not visible, proceeding without modal handling');
     }
@@ -109,7 +103,6 @@ export class CheckoutPagePo extends BasePo {
     
     console.log('Looking for total price on current page:', this.page.url());
     
-    // Try different possible total price locators
     const totalPriceLocators = [
       'tr:has-text("Total Amount") .cart_total_price',
       'tr:has-text("Total") .cart_total_price', 
@@ -123,19 +116,14 @@ export class CheckoutPagePo extends BasePo {
         const element = this.page.locator(locator);
         if (await element.isVisible({ timeout: 1000 })) {
           const text = await element.textContent();
-          console.log(`Found total price with selector "${locator}": ${text}`);
           return text?.trim() || '';
         }
       } catch (error) {
-        // Continue to next locator
       }
     }
     
-    console.log('No total price element found, trying original locator...');
-    // await expect(this.totalPrice).toBeVisible({ timeout: 10000 });
     await expect(this.totalPrice).not.toHaveText('Rs. 0', { timeout: 15000 });
     const text = await this.totalPrice.innerText();
-    console.log('Checkout total price found:', text);
     return text.trim();
   }
 
@@ -149,11 +137,5 @@ export class CheckoutPagePo extends BasePo {
     await this.ensurePageReady();
     const text = await this.taxPrice.textContent();
     return text?.trim() || '';
-  }
-
-  async isOrderSuccessful(): Promise<boolean> {
-    await this.ensurePageReady();
-    // This method should be called on payment page, not checkout page
-    return false;
   }
 }

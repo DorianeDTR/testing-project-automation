@@ -16,7 +16,6 @@ export class HeaderPagePo extends BasePo {
   }
 
   get productsLink() {
-    // return this.page.getByRole('link', { name: 'Products' });
     return this.page.locator('a[href="/products"]');
   }
 
@@ -53,12 +52,10 @@ export class HeaderPagePo extends BasePo {
   }
 
   get loggedInUser() {
-    // return this.page.locator('.nav.navbar-nav > li').filter({ hasText: 'Logged in as' });
     return this.page.locator('li:has-text("Logged in as")');
   }
 
   get deleteAccountLink() {
-    // return this.page.locator('a[href="/delete_account"]');
     return this.page.getByRole('link', { name: 'Delete Account' });
   }
 
@@ -80,7 +77,6 @@ export class HeaderPagePo extends BasePo {
   async navigateToProducts(): Promise<void> {
     await this.ensurePageReady();
     await this.productsLink.click({ force: true });
-    // await this.page.waitForLoadState('networkidle');
     if (!this.page.url().includes('/products')) {
       await this.page.goto('https://automationexercise.com/products');
     }
@@ -89,14 +85,12 @@ export class HeaderPagePo extends BasePo {
   async navigateToCart(): Promise<void> {
     await this.ensurePageReady();
     await this.cartLink.click();
-    // await this.page.waitForLoadState('networkidle');
     await this.page.waitForURL('**/view_cart');
   }
 
   async navigateToSignupLogin(): Promise<void> {
     await this.ensurePageReady();
     await this.signupLoginLink.click();
-    // await this.page.waitForLoadState('networkidle');
   }
 
   async navigateToTestCases(): Promise<void> {
@@ -159,7 +153,6 @@ export class HeaderPagePo extends BasePo {
   async deleteAccount(): Promise<void> {
     await this.ensurePageReady();
     await this.deleteAccountLink.click();
-    // await this.page.waitForLoadState('networkidle');
     await this.page.waitForURL('**/delete_account', { timeout: 15000 });
   }
 
