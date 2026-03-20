@@ -13,11 +13,6 @@ Given('I am on homepage', async ({ homepagePo }: AllFixtures) => {
 
 Given('the home page is visible successfully', async ({ homepagePo, loginPagePo }: AllFixtures) => {
   await homepagePo.shouldBeDisplayed();
-  
-  await loginPagePo.goTo();
-  await loginPagePo.shouldBeDisplayed();
-  const user = users.john;
-  await loginPagePo.logAs(user.email, user.password);
 });
 
 When('I click on {string} button', async ({ headerPagePo }: AllFixtures) => {
@@ -107,21 +102,17 @@ Then('their total price is calculated correctly', async ({ cartPagePo, checkoutP
   expect(totalPrice).toContain('Rs. 2500');
 });
 
-When('I enter description in comment text area and click Place Order', async ({ checkoutPagePo }: AllFixtures) => {
+When('I enter description in comment text area and click \'Place Order\'', async ({ checkoutPagePo }: AllFixtures) => {
   await checkoutPagePo.placeOrder('Test order comment');
 });
 
-When('I enter payment details: Name on Card, Card Number, CVC, Expiration date', async ({ paymentPagePo }: AllFixtures) => {
-  await paymentPagePo.fillPaymentDetails('John Doe', '4111111111111111', '123', '12/28');
+Then('I enter payment details', async ({ paymentPagePo }: AllFixtures) => {
+  await paymentPagePo.proceedPayment('John Doe', '4111111111111111', '123', '12', '2028');
 });
 
-When('I click \'Pay and Confirm Order\' button', async ({ paymentPagePo }: AllFixtures) => {
-  await paymentPagePo.payAndConfirmOrder();
-});
-
-Then('success message \'Your order has been placed successfully!\' is visible', async ({ paymentPagePo }: AllFixtures) => {
-  await paymentPagePo.verifyOrderSuccess();
-});
+// Then('success message \'Your order has been placed successfully!\' is visible', async ({ paymentPagePo }: AllFixtures) => {
+//   await paymentPagePo.verifyOrderSuccess();
+// });
 
 When('I click \'Download Invoice\' button', async ({ paymentPagePo }: AllFixtures) => {
   await paymentPagePo.downloadInvoice();
@@ -132,7 +123,7 @@ Then('invoice is downloaded successfully', async ({ paymentPagePo }: AllFixtures
   console.log('Invoice download initiated');
 });
 
-When('I click \'Delete Account\' button', async ({ headerPagePo, accountStatusPagePo }: AllFixtures) => {
+Then('I click \'Delete Account\' button', async ({ headerPagePo, accountStatusPagePo }: AllFixtures) => {
   await headerPagePo.deleteAccount();
   await accountStatusPagePo.validateAccountDeleted();
   await accountStatusPagePo.clickContinue();

@@ -48,7 +48,8 @@ export class CheckoutPagePo extends BasePo {
   }
 
   get placeOrderButton() {
-    return this.page.getByRole('button', { name: 'Place Order' });
+    // return this.page.getByRole('button', { name: 'Place Order' });
+    return this.page.getByRole('link', { name: 'Place Order' });
   }
 
   get paymentSection() {
