@@ -82,8 +82,9 @@ export class PaymentPagePo extends BasePo {
   async downloadInvoice(): Promise<void> {
     await this.ensurePageReady();
     await this.handleConsent();
-    const downloadPromise = this.page.waitForEvent('download');
-    await this.downloadInvoiceButton.click();
+    const downloadPromise = this.page.waitForEvent('download', { timeout: 20000 });
+    await this.downloadInvoiceButton.click({ force: true });
     const download = await downloadPromise;
+    console.log('Downloaded invoice:', download.suggestedFilename());
   }
 }
