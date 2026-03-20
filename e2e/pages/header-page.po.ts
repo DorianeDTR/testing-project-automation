@@ -58,7 +58,8 @@ export class HeaderPagePo extends BasePo {
   }
 
   get deleteAccountLink() {
-    return this.page.locator('a[href="/delete_account"]');
+    // return this.page.locator('a[href="/delete_account"]');
+    return this.page.getByRole('link', { name: 'Delete Account' });
   }
 
   get logoutLink() {
@@ -158,7 +159,8 @@ export class HeaderPagePo extends BasePo {
   async deleteAccount(): Promise<void> {
     await this.ensurePageReady();
     await this.deleteAccountLink.click();
-    await this.page.waitForLoadState('networkidle');
+    // await this.page.waitForLoadState('networkidle');
+    await this.page.waitForURL('**/delete_account', { timeout: 15000 });
   }
 
   async isLinkVisible(linkName: string): Promise<boolean> {
