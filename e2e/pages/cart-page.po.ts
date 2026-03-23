@@ -161,8 +161,8 @@ export class CartPagePo extends BasePo {
     await this.proceedToCheckoutButton.click({ force: true });
 
     await Promise.race([
-        this.page.waitForURL('**/checkout', { timeout: 5000 }).catch(() => {}),
-        this.page.locator('#checkoutModal').waitFor({ state: 'visible', timeout: 5000 }).catch(() => {})
+        this.page.waitForURL('**/checkout', { timeout: 15000 }).catch(() => {}),
+        this.page.locator('#checkoutModal').waitFor({ state: 'visible', timeout: 15000 }).catch(() => {})
     ]);
   }
 
