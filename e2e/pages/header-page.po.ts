@@ -56,7 +56,7 @@ export class HeaderPagePo extends BasePo {
   }
 
   get deleteAccountLink() {
-    return this.page.getByRole('link', { name: 'Delete Account' });
+    return this.page.getByRole('link', { name: /Delete Account/i });
   }
 
   get logoutLink() {
