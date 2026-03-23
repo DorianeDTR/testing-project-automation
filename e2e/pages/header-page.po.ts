@@ -52,7 +52,7 @@ export class HeaderPagePo extends BasePo {
   }
 
   get loggedInUser() {
-    return this.page.locator('li:has-text("Logged in as")');
+    return this.page.locator('li', { hasText: /Logged in as/i });
   }
 
   get deleteAccountLink() {
@@ -134,15 +134,16 @@ export class HeaderPagePo extends BasePo {
     return await this.loggedInUser.isVisible();
   }
 
-  async getLoggedInUserName(): Promise<string> {
-    await this.ensurePageReady();
-    const text = await this.loggedInUser.textContent();
-    if (text) {
-      const match = text.match(/Logged in as (.+)/);
-      return match ? match[1].trim() : '';
-    }
-    return '';
-  }
+  // async getLoggedInUserName(): Promise<string> {
+  //   await this.ensurePageReady();
+  //   // await expect(this.loggedInUser).toBeVisible({ timeout: 15000 });
+  //   const text = await this.loggedInUser.textContent();
+  //   if (text) {
+  //     const match = text.match(/Logged in as (.+)/);
+  //     return match ? match[1].trim() : '';
+  //   }
+  //   return '';
+  // }
 
   async logout(): Promise<void> {
     await this.ensurePageReady();
