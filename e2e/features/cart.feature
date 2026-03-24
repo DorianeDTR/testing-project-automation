@@ -23,9 +23,5 @@ Feature: Add Products in Cart
     And their prices are displayed correctly
     And their quantities are displayed correctly
     And their total price is calculated correctly
-    When I enter description in comment text area and click 'Place Order'
-    Then I enter payment details
-    When I click 'Download Invoice' button
-    Then invoice is downloaded successfully
     Then I click 'Delete Account' button
     

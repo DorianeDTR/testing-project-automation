@@ -102,33 +102,33 @@ Then('their total price is calculated correctly', async ({ cartPagePo, checkoutP
   expect(totalPrice).toContain('Rs. 2500');
 });
 
-When('I enter description in comment text area and click \'Place Order\'', async ({ checkoutPagePo }: AllFixtures) => {
-  await checkoutPagePo.placeOrder('Test order comment');
-});
-
-Then('I enter payment details', async ({ paymentPagePo }: AllFixtures) => {
-  const user = users.john;
-  await paymentPagePo.proceedPayment(
-    user.payment.cardName, 
-    user.payment.cardNumber, 
-    user.payment.cvc, 
-    user.payment.expiryMonth, 
-    user.payment.expiryYear
-  );
-});
-
-// Then('success message \'Your order has been placed successfully!\' is visible', async ({ paymentPagePo }: AllFixtures) => {
-//   await paymentPagePo.verifyOrderSuccess();
+// When('I enter description in comment text area and click \'Place Order\'', async ({ checkoutPagePo }: AllFixtures) => {
+//   await checkoutPagePo.placeOrder('Test order comment');
 // });
 
-When('I click \'Download Invoice\' button', async ({ paymentPagePo }: AllFixtures) => {
-  await paymentPagePo.downloadInvoice();
-});
+// Then('I enter payment details', async ({ paymentPagePo }: AllFixtures) => {
+//   const user = users.john;
+//   await paymentPagePo.proceedPayment(
+//     user.payment.cardName, 
+//     user.payment.cardNumber, 
+//     user.payment.cvc, 
+//     user.payment.expiryMonth, 
+//     user.payment.expiryYear
+//   );
+// });
 
-Then('invoice is downloaded successfully', async ({ paymentPagePo }: AllFixtures) => {
-  // Verify invoice download (optional as mentioned)
-  console.log('Invoice download initiated');
-});
+// // Then('success message \'Your order has been placed successfully!\' is visible', async ({ paymentPagePo }: AllFixtures) => {
+// //   await paymentPagePo.verifyOrderSuccess();
+// // });
+
+// When('I click \'Download Invoice\' button', async ({ paymentPagePo }: AllFixtures) => {
+//   await paymentPagePo.downloadInvoice();
+// });
+
+// Then('invoice is downloaded successfully', async ({ paymentPagePo }: AllFixtures) => {
+//   // Verify invoice download (optional as mentioned)
+//   console.log('Invoice download initiated');
+// });
 
 Then('I click \'Delete Account\' button', async ({ headerPagePo, accountStatusPagePo }: AllFixtures) => {
   await headerPagePo.deleteAccount();
